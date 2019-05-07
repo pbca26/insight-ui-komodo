@@ -29,6 +29,9 @@
       "email": "jack@z.cash"
     }
   ],
+  "scripts": {
+    "start": "node main.js"
+  },
   "bugs": {
     "url": "https://github.com/supernetorg/insight-ui-komodo/issues"
   },
@@ -43,8 +46,7 @@
     "front-end"
   ],
   "bitcoreNode": "bitcore-node-komodo",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "bower": "~1.2.8",
     "grunt": "~0.4.2",
@@ -56,6 +58,8 @@
     "grunt-macreload": "*",
     "grunt-css": "~0.5.4",
     "grunt-markdown": "~0.5.0",
-    "grunt-angular-gettext": "^0.2.15"
+    "grunt-angular-gettext": "^0.2.15",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
   }
 }

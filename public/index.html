@@ -11,10 +11,73 @@
 	<meta name="keywords" content="komodo, transactions, blocks, address, block chain, best block, mining difficulty, hash serialized">
 	<meta data-ng-if="currency.testnet" name="description" content="Komodo Insight. View detailed information on all testnet komodo transactions and block. {{ $root.title + $root.titleDetail }}">
 	<meta data-ng-if="!currency.testnet" name="description" content="Komodo Insight. View detailed information on all komodo transactions and block. {{ $root.title + $root.titleDetail }}">
-	<link rel="shortcut icon" href="img/icons/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="public/img/icons/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,400italic">
-	<link rel="stylesheet" href="css/main.min.css">
-  <link rel="stylesheet" href="css/common.min.css">
+	<link rel="stylesheet" href="public/css/main.min.css">
+  <link rel="stylesheet" href="public/css/common.min.css">
+  <style>
+    .status {
+      margin: 5px 0 5px 0;
+      padding: 5px 10px;
+    }
+    .status .height {
+      display: block;
+      padding-top: 3px;
+    }
+    .explorers-selector,
+    .explorers-selector:visited,
+    .explorers-selector:link {
+      width: 190px;
+      height: 64px;
+      display: inline-block;
+      color: #346464;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 12px;
+      padding-top: 14px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .explorers-selector:hover,
+    .explorers-selector:active {
+      text-decoration: none;
+      color: #346464;
+      background: #fff;
+    }
+    .explorers-selector img {
+      height: 35px;
+      border-radius: 50%;
+    }
+    .explorers-selector .symbol {
+      position: relative;
+      top: 2px;
+      padding-left: 5px;
+    }
+    .navbar-header.open .dropdown-toggle.explorers-selector {
+      text-decoration: none;
+      color: #346464;
+      background-color: #e7e7e7;
+    }
+    .navbar-header.open .dropdown-menu {
+      left: inherit;
+      max-height: 400px;
+      overflow-y: auto;
+      width: 190px;
+    }
+    .navbar-header.open .dropdown-menu li {
+      cursor: pointer;
+    }
+    .navbar-header.open .dropdown-menu li img {
+      height: 32px;
+      padding-right: 10px;
+      border-radius: 50%;
+    }
+    .navbar-header.open .dropdown-menu li a {
+      padding: 10px 20px;
+    }
+  </style>
+  <script src="public/js/explorers.js"></script>
+  <script src="public/js/url.params.js"></script>
 </head>
 <body ng-cloak class="ng-cloak">
   <div>
@@ -43,8 +106,8 @@
     </script>
   </div>
 	<div id="wrap">
-		<div class="navbar navbar-default navbar-fixed-top" data-ng-include="'views/includes/header.html'" role='navigation'></div>
-		<section class="container" data-ng-view></section>
+    <div class="navbar navbar-default navbar-fixed-top" data-ng-include="'public/views/includes/header.html'" role='navigation'></div>
+    <section class="container" data-ng-view></section>
 	</div>
 	<div id="footer" role="navigation">
     <div class="container" data-ng-controller="FooterController">
@@ -61,19 +124,32 @@
         </span>
         &nbsp;
         [
-        <a href="messages/verify" translate>verify message</a>
+        <a href="messages/verify?coin={{$root.coin}}" translate>verify message</a>
         <span> &middot; </span>
-        <a href="tx/send" translate>broadcast transaction</a>
+        <a href="tx/send?coin={{$root.coin}}" translate>broadcast transaction</a>
         ]
       </div>
       <a class="insight m10v pull-right" target="_blank" href="http://insight.is">insight <small>API v{{version}}</small></a>
     </div>
   </div>
-  <script language="javascript">window.apiPrefix = '/api';</script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="js/vendors.min.js"></script>
-	<script src="js/angularjs-all.min.js"></script>
-	<script src="js/main.min.js"></script>
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script language="javascript">
+    const coin = getAllUrlParams(window.location.href).coin;
+
+    if (coin &&
+      _explorers[coin.toUpperCase()]) {
+      window.apiPrefix = (typeof _explorers[coin.toUpperCase()] === 'object' ? _explorers[coin.toUpperCase()][0] : _explorers[coin.toUpperCase()]) + '/insight-api-komodo';
+      window.urlPrefix = typeof _explorers[coin.toUpperCase()] === 'object' ? _explorers[coin.toUpperCase()][0] : _explorers[coin.toUpperCase()];
+      window.netSymbol = coin.toUpperCase();
+    } else {
+      window.apiPrefix = 'https://kmdexplorer.io/insight-api-komodo';
+      window.urlPrefix = 'https://kmdexplorer.io';
+      window.netSymbol = 'KMD';
+    }
+  </script>
+	<script src="public/js/socket.io.js"></script>
+	<script src="public/js/vendors.min.js"></script>
+	<script src="public/js/angularjs-all.min.js"></script>
+	<script src="public/js/main.js"></script>
+  <!--script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script-->
 </body>
 </html>

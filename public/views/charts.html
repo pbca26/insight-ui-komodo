@@ -1,4 +1,4 @@
-<div data-ng-include src="'views/includes/connection.html'"></div>
+<div data-ng-include src="'public/views/includes/connection.html'"></div>
 <section data-ng-controller="ChartsController" data-ng-init="list()">
   <div class="row">
     <div class="col-xs-12 col-gray col-gray-fixed">
@@ -10,7 +10,7 @@
       </div>
       <div class="m20v text-center">
         <span class="fader" data-ng-repeat='(type, c) in charts'>
-          <a class="btn btn-primary" style="margin-bottom: 3px" href="charts/{{type}}">{{c.name}}<a>
+          <a class="btn btn-primary" style="margin-bottom: 3px" href="charts/{{type}}?coin={{$root.coin}}">{{c.name}}<a>
         </span>
       </div>
     </div>

@@ -7,15 +7,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="insight navbar-brand" href="." title="Komodo Explorer"><img id="brandImg" src="img/logo.png" alt="Komodo"></a>
+      <a class="dropdown-toggle explorers-selector" data-toggle="dropdown" href="#">
+        <img src="public/img/coins/{{currency.symbol.toLowerCase()}}.png" alt="Logo"> <span class="symbol">{{currency.symbol}}</span> <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li data-ng-repeat="item in explorers">
+          <a data-ng-click="changeUrl({item})" data-hide="item === currency.symbol"><img src="public/img/coins/{{item.toLowerCase()}}.png" alt="Logo"> {{item}}</a>
+        </li>
+      </ul>
     </div>
     <div class="navbar-collapse collapse" collapse="$root.isCollapsed">
       <ul class="nav navbar-nav">
         <li data-ng-repeat="item in menu" ui-route="{{item.link}}" data-ng-class="{active: $uiRoute}">
-          <a href="{{item.link}}">{{item.title|translate}}</a>
+          <a href="{{item.link}}?coin={{$root.coin}}">{{item.title|translate}}</a>
         </li>
       </ul>
-      <span class="hidden-xs navbar-form navbar-left" data-ng-include src="'views/includes/search.html'"></span>
+      <span class="hidden-xs navbar-form navbar-left" data-ng-include src="'public/views/includes/search.html'"></span>
       <ul class="nav navbar-nav navbar-right">
         <li>
       <div class="status" data-ng-controller="StatusController">
@@ -28,20 +35,22 @@
             <span  class="glyphicon glyphicon-refresh icon-rotate"></span>
             {{sync.syncPercentage}}%
           </span>
-          <span class="glyphicon glyphicon-ok" tooltip="Historic sync finished" tooltip-placement="bottom" data-ng-show="sync.status==='finished'"> </span>
+          <span class="glyphicon glyphicon-ok" tooltip="Historic sync finished" tooltip-placement="bottom" data-ng-hide="sync.status==='finished'"> </span>
         </div>
-        &nbsp; &middot;
+        &nbsp;
         <span data-ng-init="getStatus('Info')">
-          <strong>{{'Conn'|translate}}</strong> {{info.connections}}
-        </span> &middot;
-        <strong>{{'Height'|translate}}</strong> {{totalBlocks || info.blocks}}
+          <strong>{{'Connections'|translate}}</strong> {{info.connections}}
+        </span>
+        <span class="height">
+          <strong>{{'Height'|translate}}</strong> {{totalBlocks || info.blocks}}
+        </span>
       </div>
       </li>
       <li>
         <a data-ng-click="openScannerModal()"><span class="glyphicon
             glyphicon-qrcode"></span> Scan</a>
       </li>
-      <li class="dropdown" data-ng-controller="CurrencyController" data-ng-include="'views/includes/currency.html'"></li>
+      <li class="dropdown" data-ng-controller="CurrencyController" data-ng-include="'public/views/includes/currency.html'"></li>
       </ul>
     </div>
   </div>
