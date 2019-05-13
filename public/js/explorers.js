@@ -7,7 +7,7 @@ var _explorers = {
   BTCH: 'https://btch.kmdexplorer.io',
   COQUI: 'https://coqui.kmdexplorer.io',
   BET: 'https://bet.kmdexplorer.io',
-  BOTS: 'https://bot.kmdexplorer.io',
+  BOTS: 'https://bots.kmdexplorer.io',
   CEAL: 'https://ceal.kmdexplorer.io',
   CRYPTO: 'https://crypto.kmdexplorer.io',
   DEX: 'https://dex.kmdexplorer.io',
@@ -17,12 +17,10 @@ var _explorers = {
   MESH: 'https://mesh.kmdexplorer.io',
   MGW: 'https://mgw.kmdexplorer.io',
   MSHARK: 'https://mshark.kmdexplorer.io',
-  MVP: 'https://mvp.kmdexplorer.io',
   PANGEA: 'https://pangea.kmdexplorer.io',
   PIZZA: 'https://pizza.kmdexplorer.io',
   REVS: 'https://revs.kmdexplorer.io',
   SUPERNET: 'https://supernet.kmdexplorer.io',
-  SHARK: 'https://shark.kmdexplorer.io',
   WLC: 'https://wlc.kmdexplorer.io',
   AXO: 'https://axo.kmdexplorer.io',
   DSEC: 'https://dsec.kmdexplorer.io',
@@ -37,7 +35,10 @@ var _explorers = {
   CCL: 'https://ccl.kmdexplorer.io',
   PIRATE: 'http://pirate.explorer.dexstats.info',
   DION: 'https://explorer.dionpay.com',
-  KOIN: 'http://3.0.32.41:3001',
+  KOIN: {
+    ext: true,
+    url: 'http://3.0.32.41:3001',
+  },
   KMDICE: 'https://kmdice.explorer.dexstats.info',
   PTX: 'http://ptx.explorer.dexstats.info',
   ZEX: 'http://zex.explorer.dexstats.info',
@@ -46,13 +47,19 @@ var _explorers = {
   ILN: 'https://explorer.ilien.io',
   OUR: 'http://our.explorer.dexstats.info',
   KSB: 'http://ksb.explorer.dexstats.info',
-  MORTY: 'https://morty.kmd.dev',
+  MORTY: {
+    apiPrefix: '/api',
+    url: 'https://morty.kmd.dev',
+  },
+  RICK: {
+    apiPrefix: '/api',
+    url: 'https://rick.kmd.dev',
+  },
   VOTE2019: 'https://vote2019.world',
-  RICK: 'https://rick.kmd.dev',
 };
 
 var explorers = [];
 
 for (var key in _explorers) {
-  explorers.push(key);
+  explorers.push(typeof _explorers[key] === 'object' && _explorers[key].hasOwnProperty('ext') ? { ext: true, name: key, url: _explorers[key].url } : key);
 }

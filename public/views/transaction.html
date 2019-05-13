@@ -70,7 +70,7 @@
           <td><strong translate>Included in Block</strong></td>
           <td data-ng-show="tx.blockhash" class="text-muted text-right"> 
             <div class="ellipsis">
-              <a href="block/{{tx.blockhash}}?coin={{$root.coin}}">{{tx.blockhash}}</a>
+              <a href="block/{{tx.blockhash}}/coin/{{$root.coin}}">{{tx.blockhash}}</a>
             </div>
           <td data-ng-show="!tx.blockhash" class="text-muted text-right">Unconfirmed</td>
         </tr>
