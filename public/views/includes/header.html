@@ -7,16 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <explorer-selector currency="currency.symbol"></explorer-selector>
-      <!--a class="dropdown-toggle explorers-selector" data-toggle="dropdown" href="#">
-        <img ng-src="public/img/coins/{{currency.symbol.toLowerCase()}}.png" alt="Logo"> <span class="symbol">{{currency.symbol}}</span> <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-          <input type="text" ng-click="openMenu()" class="form-control" data-ng-model="explorerQuickFilter" placeholder="Quick search" data-ng-submit="search()" focus="true">
-          <li data-ng-repeat="item in explorers">
-          <a href="{{!item.hasOwnProperty('ext') ? '/coin/' + item : item.url}}" target="{{ item.hasOwnProperty('ext') ? '_blank' : '_self' }}" data-hide="item === currency.symbol"><img ng-src="public/img/coins/{{!item.hasOwnProperty('ext') ? item.toLowerCase() : item.name.toLowerCase()}}.png" alt="Logo"> {{!item.hasOwnProperty('ext') ? item.toUpperCase() : item.name.toUpperCase()}}</a>
-        </li>
-      </ul-->
+      <explorer-selector coin="$root.coin"></explorer-selector>
     </div>
     <div class="navbar-collapse collapse" collapse="$root.isCollapsed">
       <ul class="nav navbar-nav">
