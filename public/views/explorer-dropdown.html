@@ -1,0 +1,12 @@
+<span class="explorers--dropdown{{isOpened ? ' open' : ''}}">
+  <a class="dropdown-toggle-trigger explorers-selector" ng-click="toggleSelect()">
+    <img ng-src="public/img/coins/{{currency.toLowerCase()}}.png" alt="Logo"> <span class="symbol">{{currency.toUpperCase()}}</span> <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu-block">
+    <input type="text" ng-keyup="keyup()" class="form-control quick-search" data-ng-model="explorerQuickFilter" placeholder="Quick search" data-ng-submit="search()" focus="true">       
+    <div class="no-match" ng-show="!explorers.length">No match</div>
+    <li data-ng-repeat="item in explorers" ng-show="explorers.length">
+      <a href="{{!item.hasOwnProperty('ext') ? '/coin/' + item : item.url}}" target="{{item.hasOwnProperty('ext') ? '_blank' : '_self'}}" data-hide="item === currency.symbol"><img ng-src="public/img/coins/{{!item.hasOwnProperty('ext') ? item.toLowerCase() : item.name.toLowerCase()}}.png" alt="Logo"> {{!item.hasOwnProperty('ext') ? item.toUpperCase() : item.name.toUpperCase()}}</a>
+    </li>
+  </ul>
+</span>

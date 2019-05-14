@@ -1,25 +1,27 @@
 <div class="container">
   <div data-ng-controller="HeaderController">
-    <div class="navbar-header">
+    <div id="nav-bar" class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" data-ng-click="$root.isCollapsed = !$root.isCollapsed">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="dropdown-toggle explorers-selector" data-toggle="dropdown" href="#">
-        <img src="public/img/coins/{{currency.symbol.toLowerCase()}}.png" alt="Logo"> <span class="symbol">{{currency.symbol}}</span> <span class="caret"></span>
+      <explorer-selector currency="currency.symbol"></explorer-selector>
+      <!--a class="dropdown-toggle explorers-selector" data-toggle="dropdown" href="#">
+        <img ng-src="public/img/coins/{{currency.symbol.toLowerCase()}}.png" alt="Logo"> <span class="symbol">{{currency.symbol}}</span> <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-        <li data-ng-repeat="item in explorers">
-          <a data-ng-click="changeUrl({item})" data-hide="item === currency.symbol"><img src="public/img/coins/{{item.toLowerCase()}}.png" alt="Logo"> {{item}}</a>
+          <input type="text" ng-click="openMenu()" class="form-control" data-ng-model="explorerQuickFilter" placeholder="Quick search" data-ng-submit="search()" focus="true">
+          <li data-ng-repeat="item in explorers">
+          <a href="{{!item.hasOwnProperty('ext') ? '/coin/' + item : item.url}}" target="{{ item.hasOwnProperty('ext') ? '_blank' : '_self' }}" data-hide="item === currency.symbol"><img ng-src="public/img/coins/{{!item.hasOwnProperty('ext') ? item.toLowerCase() : item.name.toLowerCase()}}.png" alt="Logo"> {{!item.hasOwnProperty('ext') ? item.toUpperCase() : item.name.toUpperCase()}}</a>
         </li>
-      </ul>
+      </ul-->
     </div>
     <div class="navbar-collapse collapse" collapse="$root.isCollapsed">
       <ul class="nav navbar-nav">
         <li data-ng-repeat="item in menu" ui-route="{{item.link}}" data-ng-class="{active: $uiRoute}">
-          <a href="{{item.link}}?coin={{$root.coin}}">{{item.title|translate}}</a>
+          <a href="{{item.link}}/coin/{{$root.coin}}">{{item.title|translate}}</a>
         </li>
       </ul>
       <span class="hidden-xs navbar-form navbar-left" data-ng-include src="'public/views/includes/search.html'"></span>
@@ -27,23 +29,24 @@
         <li>
       <div class="status" data-ng-controller="StatusController">
         <div data-ng-init="getSync()" class="pull-left">
-          <span class="t text-danger"  data-ng-show="sync.error" tooltip="{{sync.error}}" tooltip-placement="bottom"> 
+          <span class="t text-danger" data-ng-show="sync.error" tooltip="{{sync.error}}" tooltip-placement="bottom"> 
               <span  class="glyphicon glyphicon-warning-sign"></span>
               ERROR 
           </span>
           <span class="t" tooltip="{{sync.syncedBlocks}} / {{sync.blockChainHeight}} synced. {{sync.skippedBlocks || 0}} skipped" tooltip-placement="bottom" data-ng-show="sync.status==='syncing'"> 
-            <span  class="glyphicon glyphicon-refresh icon-rotate"></span>
+            <span class="glyphicon glyphicon-refresh icon-rotate"></span>
             {{sync.syncPercentage}}%
           </span>
-          <span class="glyphicon glyphicon-ok" tooltip="Historic sync finished" tooltip-placement="bottom" data-ng-hide="sync.status==='finished'"> </span>
+          <span class="glyphicon glyphicon-ok" tooltip="Historic sync finished" tooltip-placement="bottom" data-ng-hide="sync.status==='finished' || sync.error"> </span>
         </div>
         &nbsp;
-        <span data-ng-init="getStatus('Info')">
+        <span data-ng-init="getStatus('Info')" data-ng-show="!sync.error">
           <strong>{{'Connections'|translate}}</strong> {{info.connections}}
         </span>
-        <span class="height">
+        <span class="height" data-ng-show="!sync.error">
           <strong>{{'Height'|translate}}</strong> {{totalBlocks || info.blocks}}
         </span>
+        <span class="height" data-ng-show="sync.error">Sync error</span>
       </div>
       </li>
       <li>
