@@ -121,9 +121,21 @@
   padding: 20px 20px;
   border: dashed 1px rgba(0, 0, 0, 0.3);
 }
+.dropdown-menu li {
+  cursor: pointer;
+}
+#ngProgress-container {
+  top: 62px;
+}
 
 @media only screen and (max-width : 767px) {
   .dropdown-menu-block {
     left: 0;
+  }
+  #wrap>.container {
+    padding: 70px 15px 0;
+  }
+  .navbar-default .navbar-toggle {
+    margin-top: 14px;
   }
 }
