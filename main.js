@@ -24,41 +24,61 @@ app.use(bodyParser.urlencoded({
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/messages/verify', (req, res) => {
+app.get('/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tx/send', (req, res) => {
+app.get('/messages/verify/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/blocks', (req, res) => {
+app.get('/tx/send/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/charts/*', (req, res) => {
+app.get('/blocks/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/status', (req, res) => {
+app.get('/charts/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/block/*', (req, res) => {
+app.get('/status/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/block-index/*', (req, res) => {
+app.get('/block/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/block-date/*', (req, res) => {
+app.get('/block-index/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tx/*', (req, res) => {
+app.get('/block-date/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/address/*', (req, res) => {
+app.get('/tx/*/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/address/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-server = require('http')
-.createServer(app)
-.listen(8888, 'localhost');
+let server;
+const config = {
+  ip: 'localhost',
+  https: false,
+  port: 8888,
+};
 
-console.log(`Server is running`);
+if (config.https) {
+  const options = {
+    key: fs.readFileSync('certs/priv.pem'),
+    cert: fs.readFileSync('certs/cert.pem'),
+  };
+  server = require('https')
+            .createServer(options, app)
+            .listen(config.port, config.isDev ? 'localhost' : config.ip);
+} else {
+  server = require('http')
+            .createServer(app)
+            .listen(config.port, config.isDev ? 'localhost' : config.ip);
+}
+
+console.log(`Insight Common UI server is running`);
