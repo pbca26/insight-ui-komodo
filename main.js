@@ -57,6 +57,12 @@ app.get('/tx/*/coin/*', (req, res) => {
 app.get('/address/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
+app.get('/charts/*/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/charts/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
