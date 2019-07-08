@@ -1,0 +1,234 @@
+/*
+  TODO: get rid of important
+*/
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4 {
+  color: rgb(38, 51, 70);
+}
+
+.dark a {
+  color: #2f6983;
+}
+
+.dark .navbar-default {
+  background-color: rgb(38, 51, 70);
+}
+
+.dark .navbar-default a {
+  color: #fff !important;
+  font-size: 14px;
+}
+
+.dark .navbar-default a:hover,
+.dark .navbar-default a:active,
+.dark .navbar-default a:focus,
+.dark .explorers--dropdown.open .dropdown-toggle-trigger {
+  color: #41EAD4 !important;
+  background: linear-gradient(to top, #41EAD4 0, #41EAD4 0.25em, transparent 0.25em, transparent 100%) !important;
+}
+
+.dark .navbar-default .dropdown-toggle-trigger.explorers-selector {
+  font-size: 20px;
+}
+
+.dark .dropdown .dropdown-toggle {
+  background-color: rgb(38, 51, 70) !important;
+}
+
+.dark .dropdown.open .dropdown-toggle {
+  background: none !important;
+}
+
+.dark .dropdown-menu {
+  padding: 0;
+}
+
+.dark .navbar-default .dropdown-menu > li > a {
+  color: #9e9e9e !important;
+  background-color: rgb(38, 51, 70);
+}
+
+.dark .dropdown-menu > li > a:hover,
+.dark .dropdown-menu > li > a:focus {
+  background: none !important;
+  background-color: #f8f9fa !important;
+}
+
+.dark .explorers--dropdown.open .dropdown-toggle-trigger {
+  background: none !important;
+  background-color: #f8f9fa;
+  color: #9e9e9e !important;
+}
+
+.dark .dropdown-menu-block {
+  background-color: rgb(38, 51, 70);
+}
+
+.dark .dropdown-menu-block > li > a:hover,
+.dark .dropdown-menu-block > li > a:focus {
+  background: none !important;
+  color: #9e9e9e !important;
+  background-color: #f8f9fa !important;
+}
+
+.dark .dropdown-menu-block input {
+  top: 64px;
+  border-top: solid 1px rgba(255, 255, 255, 0.2);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.2)
+}
+
+.dark .explorers--dropdown.open .dropdown-toggle-trigger.explorers-selector {
+  color: #41EAD4 !important;
+}
+
+.dark .btn-primary {
+  border-radius: 1337rem !important;
+  font-size: 1em !important;
+  color: #fff;
+  background-color: #26456b;
+  border-color: #26456b;
+  padding: 6px 16px;
+}
+
+.dark .btn-primary:hover,
+.dark .btn-primary:active,
+.dark .btn-primary:focus {
+  color: #fff;
+  background-color: #315888;
+  border-color: #3a68a0;
+}
+
+.dark input[type="text"] {
+  color: #fff !important;
+  background: rgb(38, 51, 70) !important;
+}
+
+.dark .dropdown-menu-block .no-match {
+  color: #fff;
+}
+
+.dark .dropdown-currency .dropdown-menu {
+  border-top: solid 1px rgba(255, 255, 255, 0.2);
+  top: 63px;
+  background: rgb(38, 51, 70);
+  padding-bottom: 10px;
+}
+
+.dark #footer {
+  background: #343a40;
+}
+
+.dark .modal-open .modal-header {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background: rgb(38, 51, 70);
+}
+
+.dark .modal-open .modal-header h3 { 
+  color: #fff;
+}
+
+.dark .modal-content {
+  border: 1px solid #999 !important;
+}
+
+.dark #home .btn-more {
+  border: none;
+  padding-bottom: 25px;
+}
+
+.dark #search {
+  border: solid 1px rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+.dark #search::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(255, 255, 255, 0.5);
+  font-style: normal;
+}
+
+.dark #search:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgba(255, 255, 255, 0.5);
+  font-style: normal;
+}
+
+.dark #search::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgba(255, 255, 255, 0.5);
+  font-style: normal;
+}
+
+.dark #search.loading {
+  background-image: url(../img/loading.gif) !important;
+  background-position: 5px center !important;
+  background-repeat: no-repeat !important;
+  width: calc(100% - 13px);
+}
+
+.dark .txvalues-success {
+  background-color: #17a2b8;
+}
+
+.dark .txvalues-primary {
+  background-color: #28a745;
+}
+
+.dark .txvalues-danger {
+  background-color: #dc3545;
+}
+
+.dark .text-success {
+  color: #28a745;
+}
+
+.dark .btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.dark .progress-bar-info {
+  background-color: #28a745;
+}
+
+.dark #ngProgress {
+  background-color: #20c997 !important;
+}
+
+.dark .status {
+  background: #2e527d;
+  margin: 9px 10px 5px;
+}
+
+.dark #powered a.komodoplatform {
+  background-size: 130px;
+  background-color: #26456b;
+  position: relative;
+  top: 5px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.dark .about-kmd-block {
+  padding-bottom: 0;
+}
+
+.dark .btn-calendar {
+  font-size: 14px !important;
+  padding: 2px 6px;
+  margin-left: 5px;
+  border-radius: 6px !important;
+}
+
+.dark .no_matching.text-danger {
+  z-index: 10;
+}
+
+.dark .block-id h3 {
+  color: #fff;
+}
+
+.dark .charts-block .btn-primary {
+  padding: 6px 8px;
+}
