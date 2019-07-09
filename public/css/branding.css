@@ -230,10 +230,31 @@
   z-index: 10;
 }
 
+.dark #search-form-mobile {
+  margin-top: 0;
+  position: fixed;
+  width: 100%;
+  left: 0;
+}
+
 .dark .block-id h3 {
   color: #fff;
 }
 
 .dark .charts-block .btn-primary {
   padding: 6px 8px;
+}
+
+@media only screen and (max-width : 767px) {
+  .dark #wrap > .container {
+    padding: 64px 15px 0;
+  }
+  .dark .adrotator-container {
+    margin-top: 65px;
+  }
+  .dark #search {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
 }
