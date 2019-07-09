@@ -117,6 +117,11 @@
   padding-bottom: 10px;
 }
 
+.dark .dropdown-menu-group {
+  color: #fff !important;
+  background-color: rgb(38, 51, 70) !important;
+}
+
 .dark #footer {
   background: #343a40;
 }
@@ -198,7 +203,6 @@
 
 .dark .status {
   background: #2e527d;
-  margin: 9px 10px 5px;
 }
 
 .dark #powered a.komodoplatform {
@@ -208,6 +212,7 @@
   top: 5px;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+  background-image: url(../img/komodoplatform-white.png);
 }
 
 .dark .about-kmd-block {

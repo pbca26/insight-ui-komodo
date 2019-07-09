@@ -41,7 +41,8 @@
           </tbody>
         </table>
         <div class="btn-more">
-          <a href="blocks/coin/{{$root.coin}}" class="btn btn-default" translate>See all blocks</a>
+          <a href="blocks/coin/{{$root.coin}}" class="btn btn-default" ng-if="$root.theme === 'light'" translate>See all blocks</a>
+          <a href="blocks/coin/{{$root.coin}}" class="btn btn-primary" ng-if="$root.theme === 'dark'" translate>See all blocks</a>
         </div>
 
         <h2 translate>Latest Transactions</h2>
@@ -66,7 +67,7 @@
 
       </div>
 
-      <div class="col-xs-12 col-md-4 col-gray">
+      <div class="col-xs-12 col-md-4 col-gray about-kmd-block">
         <h2 translate>What is Komodo?</h2>
         <p id="intro" translate>End-to-end Blockchain Solutions Provider empowering developers to build freely
 and participate in creating the largest open blockchain network.</p>

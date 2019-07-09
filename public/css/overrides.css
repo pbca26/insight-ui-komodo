@@ -1,5 +1,5 @@
 .status {
-  margin: 5px 10px 5px 0px;
+  margin: 9px 10px 5px;
   padding: 5px 10px;
 }
 .status .height {
@@ -102,7 +102,7 @@
   position: fixed;
   top: 63px;
   border-radius: 0;
-  width: 190px;
+  width: 188px;
 }
 .quick-search {
   border: none;
@@ -127,12 +127,19 @@
 #ngProgress-container {
   top: 62px;
 }
+.dropdown-menu-group {
+  cursor: default !important;
+  padding: 10px;
+}
+.pointer {
+  cursor: pointer;
+}
 
 @media only screen and (max-width : 767px) {
   .dropdown-menu-block {
     left: 0;
   }
-  #wrap>.container {
+  #wrap > .container {
     padding: 70px 15px 0;
   }
   .navbar-default .navbar-toggle {

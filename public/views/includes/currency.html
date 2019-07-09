@@ -1,18 +1,30 @@
 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-  {{currency.symbol}} <span class="caret"></span>
+  Settings <span class="caret"></span>
 </a>
 <ul class="dropdown-menu">
-  <li>
-  <a data-ng-click="setCurrency('USD')" data-ng-class="{active: currency.symbol == 'USD'}">USD</a>
+  <li class="dropdown-menu-group">
+    Currency
   </li>
   <li>
-  <a data-ng-click="setCurrency(currency.netSymbol)" data-ng-class="{active: currency.symbol == currency.netSymbol}">{{currency.netSymbol}}</a>
+    <a data-ng-click="setCurrency('USD')" data-ng-class="{active: currency.symbol == 'USD'}">USD</a>
   </li>
   <li>
-  <a data-ng-click="setCurrency('m'+currency.netSymbol)" data-ng-class="{active: currency.symbol == ('m'+currency.netSymbol)}">m{{currency.netSymbol}}</a>
+    <a data-ng-click="setCurrency(currency.netSymbol)" data-ng-class="{active: currency.symbol == currency.netSymbol}">{{currency.netSymbol}}</a>
+  </li>
+  <li>
+    <a data-ng-click="setCurrency('m'+currency.netSymbol)" data-ng-class="{active: currency.symbol == ('m'+currency.netSymbol)}">m{{currency.netSymbol}}</a>
   </li> 
   <li>
-  <a data-ng-click="setCurrency('bits')" data-ng-class="{active: currency.symbol == 'bits'}">bits</a>
+    <a data-ng-click="setCurrency('bits')" data-ng-class="{active: currency.symbol == 'bits'}">bits</a>
+  </li>
+  <li class="dropdown-menu-group">
+    Theme
+  </li>
+  <li>
+    <a data-ng-click="setTheme('light')">Light</a>
+  </li>
+  <li>
+    <a data-ng-click="setTheme('dark')">Dark</a>
   </li>
 </ul>
 
