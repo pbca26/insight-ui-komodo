@@ -300,6 +300,8 @@ angular.module('insight.connection').controller('ConnectionController',
 angular.module('insight.currency').controller('CurrencyController',
   function($scope, $rootScope, Currency) {
     $rootScope.currency.symbol = defaultCurrency;
+    $rootScope.theme = 'dark';
+    document.getElementById('body').className += ' dark';
 
     var _roundFloat = function(x, n) {
       if(!parseInt(n, 10) || !parseFloat(x)) n = 0;
@@ -352,6 +354,16 @@ angular.module('insight.currency').controller('CurrencyController',
         $rootScope.currency.factor = 1;
       }
     };
+
+    $scope.setTheme = function(theme) {
+      document.getElementById('body').className = document.getElementById('body').className.replace('dark', '');
+
+      if (theme === 'dark') {
+        document.getElementById('body').className += ' dark';
+      }
+
+      $rootScope.theme = theme;
+    }
 
     // Get initial value
     Currency.get({}, function(res) {
@@ -732,7 +744,7 @@ angular.module('insight.system').controller('ScannerController',
 
 // Source: public/src/js/controllers/search.js
 angular.module('insight.search').controller('SearchController',
-  function($scope, $routeParams, $location, $timeout, Global, Block, Transaction, Address, BlockByHeight) {
+  function($scope, $routeParams, $rootScope, $location, $timeout, Global, Block, Transaction, Address, BlockByHeight) {
   $scope.global = Global;
   $scope.loading = false;
 
