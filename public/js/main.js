@@ -495,8 +495,19 @@ var TRANSACTION_DISPLAYED = 10;
 var BLOCKS_DISPLAYED = 5;
 
 angular.module('insight.system').controller('IndexController',
-  function($scope, Global, getSocket, Blocks) {
+  function($scope, $rootScope, $http, Global, getSocket, Blocks) {
     $scope.global = Global;
+
+    var _getNota = function() {
+      $http.get('https://' + $rootScope.coin + '.explorer.dexstats.info/insight-api-komodo/status?q=getInfo').then(function(response) {
+        if (response &&
+            response.data &&
+            response.data.info &&
+            response.data.info.notarized) {
+          $rootScope.notarized = response.data.info.notarized;
+        }
+      });
+    };
 
     var _getBlocks = function() {
       Blocks.get({
@@ -520,6 +531,7 @@ angular.module('insight.system').controller('IndexController',
 
       socket.on('block', function() {
         _getBlocks();
+        _getNota();
       });
     };
 
@@ -808,8 +820,19 @@ angular.module('insight.search').controller('SearchController',
 
 // Source: public/src/js/controllers/status.js
 angular.module('insight.status').controller('StatusController',
-  function($scope, $routeParams, $location, Global, Status, Sync, getSocket) {
+  function($scope, $routeParams, $rootScope, $http, $location, Global, Status, Sync, getSocket) {
     $scope.global = Global;
+
+    var _getNota = function() {
+      $http.get('https://' + $rootScope.coin + '.explorer.dexstats.info/insight-api-komodo/status?q=getInfo').then(function(response) {
+        if (response &&
+            response.data &&
+            response.data.info &&
+            response.data.info.notarized) {
+          $rootScope.notarized = response.data.info.notarized;
+        }
+      });
+    };
 
     $scope.getStatus = function(q) {
       Status.get({
@@ -831,6 +854,7 @@ angular.module('insight.status').controller('StatusController',
 
     var _onSyncUpdate = function(sync) {
       $scope.sync = sync;
+      _getNota();
     };
 
     var _startSocket = function () {

@@ -87,6 +87,11 @@
             </div>
           </td>
         </tr>
+        <tr data-ng-show="$root.notarized">
+          <td><strong translate>Notarized</strong></td>
+          <td class="text-right text-success" data-ng-show="tx.blockheight <= $root.notarized">Yes</td>
+          <td class="text-right" data-ng-show="tx.blockheight > $root.notarized">No</td>
+        </tr>
         </tbody>
       </table>
     </div>

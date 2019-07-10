@@ -41,7 +41,8 @@
             <th translate>Timestamp</th>
             <th class="text-right" translate>Transactions</th>
             <th class="text-right hidden-xs" translate>Mined by</th>
-            <th class="text-right" translate>Size</th>
+            <th class="text-right hidden-xs" translate>Size</th>
+            <th class="text-right" data-ng-show="$root.notarized" translate>Notarized</th>
           </tr>
         </thead>
         <tbody>
@@ -53,7 +54,9 @@
           <td>{{b.time * 1000 | date:'medium'}}</td>
           <td class="text-right">{{b.txlength}}</td>
           <td class="text-right hidden-xs"><a href="{{b.poolInfo.url}}" title="{{b.poolInfo.poolName}}" target="_blank" data-ng-show="b.poolInfo">{{b.poolInfo.poolName}}</a></td>
-          <td class="text-right">{{b.size}}</td>
+          <td class="text-right hidden-xs">{{b.size}}</td>
+          <td class="text-right text-success" data-ng-show="$root.notarized && b.height <= $root.notarized">Yes</td>
+          <td class="text-right" data-ng-show="$root.notarized && b.height > $root.notarized">No</td>
         </tr>
         </tbody>
       </table>
