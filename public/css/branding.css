@@ -169,7 +169,7 @@
   background-image: url(../img/loading.gif) !important;
   background-position: 5px center !important;
   background-repeat: no-repeat !important;
-  width: calc(100% - 13px);
+  width: calc(100% - 30px);
 }
 
 .dark .txvalues-success {
@@ -243,6 +243,10 @@
 
 .dark .charts-block .btn-primary {
   padding: 6px 8px;
+}
+
+.dark .search--dropdown {
+  background: rgb(38, 51, 70) !important;
 }
 
 @media only screen and (max-width : 767px) {

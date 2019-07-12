@@ -25,7 +25,8 @@ angular.module('insight',[
   'insight.status',
   'insight.connection',
   'insight.currency',
-  'insight.messages'
+  'insight.messages',
+  'insight.searchAssets'
 ]);
 
 angular.module('insight.system', []);
@@ -39,6 +40,7 @@ angular.module('insight.status', []);
 angular.module('insight.connection', []);
 angular.module('insight.currency', []);
 angular.module('insight.messages', []);
+angular.module('insight.searchAssets', []);
 
 // Source: public/src/js/controllers/address.js
 angular.module('insight.address').controller('AddressController',
@@ -197,6 +199,89 @@ angular.module('insight.blocks').controller('BlocksController',
 
   $scope.params = $routeParams;
 
+});
+
+angular.module('insight.searchAssets').controller('AssetsSearchController',
+  function($scope, $rootScope, $routeParams, $location, $http) {
+  $scope.loading = true;
+  $scope.balance = [];
+  $scope.transactions = [];
+  $scope.transactionsAll = [];
+  $scope.txChunkSize = 10;
+  $scope.txChunk = 0;
+
+  // ref: https://github.com/pbca26/agama-wallet-lib/blob/dev/src/time.js#L1
+  $scope.secondsToString = function(seconds, skipMultiply, showSeconds) {
+    var a = new Date(seconds * (skipMultiply ? 1 : 1000));
+    var months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours() < 10 ? `0${a.getHours()}` : a.getHours();
+    var min = a.getMinutes() < 10 ? `0${a.getMinutes()}` : a.getMinutes();
+    var sec = a.getSeconds();
+    var time = `${date} ${month} ${year} ${hour}:${min}${(showSeconds ? `:${sec}` : '')}`;
+  
+    return time;
+  };
+
+  $scope.loadMore = function() {
+    if ($scope.txChunkSize * $scope.txChunk < $scope.transactionsAll.length) {
+      $scope.txChunk++;
+    }
+
+    $scope.transactions = $scope.transactions.concat($scope.transactionsAll.slice($scope.txChunkSize * $scope.txChunk, $scope.txChunkSize * ($scope.txChunk + 1)));
+  }
+
+  if ($routeParams.address &&
+      $routeParams.address.length === 34) {
+    $http.get('https://www.atomicexplorer.com/api/explorer/search?term=' + $routeParams.address).then(function(response) {
+    //$http.get('/public/js/search.mock.json').then(function(response) {
+      if (response.data &&
+          response.data.msg &&
+          response.data.msg === 'success') {
+        for (var i = 0; i < response.data.result.balance.length; i++) {
+          if (response.data.result.balance[i] !== 'error' &&
+              response.data.result.balance[i].coin !== 'CHIPS' &&
+              (response.data.result.balance[i].balance.confirmed > 0 || response.data.result.balance[i].balance.unconfirmed > 0)) {
+            $scope.balance.push(response.data.result.balance[i]);
+          }
+        }
+
+        for (var i = 0; i < response.data.result.transactions.length; i++) {
+          if (response.data.result.transactions[i] !== 'error' &&
+              response.data.result.transactions[i].coin !== 'CHIPS') {
+            $scope.transactionsAll.push(response.data.result.transactions[i]);
+          }
+        }
+
+        $scope.transactions = $scope.transactions.concat($scope.transactionsAll.slice($scope.txChunk, $scope.txChunkSize));
+
+        $scope.loading = false;
+      } else {
+        $scope.loading = false;
+      }
+
+      $scope.address = $routeParams.address;
+    });
+  } else {
+    $scope.loading = false;
+    $scope.transactions = [];
+    $scope.balance = [];
+  }
 });
 
 // Source: public/src/js/controllers/charts.js
@@ -778,42 +863,51 @@ angular.module('insight.search').controller('SearchController',
     $scope.badQuery = false;
     $scope.loading = true;
 
-    Block.get({
-      blockHash: q
-    }, function() {
-      _resetSearch();
-      $location.path('block/' + q + '/coin/' + $rootScope.coin);
-    }, function() { //block not found, search on TX
-      Transaction.get({
-        txId: q
+    if ($rootScope.searchAssets) {
+      if (q &&
+          q.length === 34) { // address search only
+        $location.path('search/assets/' + q);
+      } else {
+        _badQuery();
+      }
+    } else {
+      Block.get({
+        blockHash: q
       }, function() {
         _resetSearch();
-        $location.path('tx/' + q + '/coin/' + $rootScope.coin);
-      }, function() { //tx not found, search on Address
-        Address.get({
-          addrStr: q
+        $location.path('block/' + q + '/coin/' + $rootScope.coin);
+      }, function() { //block not found, search on TX
+        Transaction.get({
+          txId: q
         }, function() {
           _resetSearch();
-          $location.path('address/' + q + '/coin/' + $rootScope.coin);
-        }, function() { // block by height not found
-          if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
-            BlockByHeight.get({
-              blockHeight: q
-            }, function(hash) {
-              _resetSearch();
-              $location.path('/block/' + hash.blockHash + '/coin/' + $rootScope.coin);
-            }, function() { //not found, fail :(
+          $location.path('tx/' + q + '/coin/' + $rootScope.coin);
+        }, function() { //tx not found, search on Address
+          Address.get({
+            addrStr: q
+          }, function() {
+            _resetSearch();
+            $location.path('address/' + q + '/coin/' + $rootScope.coin);
+          }, function() { // block by height not found
+            if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
+              BlockByHeight.get({
+                blockHeight: q
+              }, function(hash) {
+                _resetSearch();
+                $location.path('/block/' + hash.blockHash + '/coin/' + $rootScope.coin);
+              }, function() { //not found, fail :(
+                $scope.loading = false;
+                _badQuery();
+              });
+            }
+            else {
               $scope.loading = false;
               _badQuery();
-            });
-          }
-          else {
-            $scope.loading = false;
-            _badQuery();
-          }
+            }
+          });
         });
       });
-    });
+    }
   };
 
 });
@@ -1331,6 +1425,46 @@ angular.module('insight.transactions')
 var ZeroClipboard = window.ZeroClipboard;
 
 angular.module('insight')
+  .directive('searchSelector', function($document, $rootScope) {
+    return {
+      restrict: 'E',
+      require: '?ngModel',
+      scope: {
+        coin: '=',
+      },
+      templateUrl: 'public/views/search-dropdown.html',
+      replace: true,
+      link: function(scope, element, attr) {
+        scope.isOpened = false;
+
+        scope.toggleSearchParams = function(param) {
+          $rootScope.searchAssets = param;
+        }
+
+        scope.toggleSelect = function() {
+          scope.isOpened = !scope.isOpened;
+          document.getElementById('ngProgress-container').style.display = scope.isOpened ? 'none' : 'block';
+        }
+
+        $document.bind('click', function(event) {
+          var isParentNodeClicked = false;
+          
+          for (var i = 0; i < event.path.length; i++) {
+            if (event.path[i].className &&
+                event.path[i].className.indexOf('search--dropdown') > -1) {
+              isParentNodeClicked = true;
+            }
+          }
+
+          if (!isParentNodeClicked) {
+            document.getElementById('ngProgress-container').style.display = 'block';
+            scope.isOpened = false;
+            scope.$apply();
+          }
+        });
+      }
+    };
+  })
   .directive('explorerSelector', function($document) {
     return {
       restrict: 'E',
@@ -1492,6 +1626,10 @@ angular.module('insight')
 //Setting up route
 angular.module('insight').config(function($routeProvider) {
   $routeProvider.
+    when('/search/assets/:address', {
+      templateUrl: 'public/views/search-assets.html',
+      title: 'Komodo Asset Chains Search '
+    }).
     when('/block/:blockHash/coin/:coin', {
       templateUrl: 'public/views/block.html',
       title: 'Komodo Block '
