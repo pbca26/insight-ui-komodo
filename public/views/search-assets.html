@@ -34,7 +34,7 @@
           <tbody>
             <tr data-ng-repeat='b in balance'>
               <td>
-                <a href="/address/{{address}}/coin/{{b.coin.toLowerCase()}}" target="_blank"><img ng-src="public/img/coins/{{b.coin}}.png" alt="{{b.coin}}"> {{b.coin}}</a>
+                <a href="/address/{{address}}/coin/{{b.coin}}" target="_blank"><img ng-src="public/img/coins/{{b.coin.toLowerCase()}}.png" alt="{{b.coin}}"> {{b.coin}}</a>
               </td>
               <td>{{b.balance.confirmed}}</td>
               <td class="hidden-xs">{{b.balance.unconfirmed > 0 ? b.balance.unconfirmed : ''}}</td>
