@@ -253,9 +253,6 @@
   .dark #wrap > .container {
     padding: 64px 15px 0;
   }
-  .dark .adrotator-container {
-    margin-top: 65px;
-  }
   .dark #search {
     border-radius: 0;
     border-left: none;

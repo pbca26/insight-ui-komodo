@@ -194,7 +194,7 @@
     left: 0;
   }
   #wrap > .container {
-    padding: 70px 15px 0;
+    padding: 25px 15px 0;
   }
   .navbar-default .navbar-toggle {
     margin-top: 14px;
@@ -221,6 +221,22 @@
   }
   .no_matching.text-danger {
     top: 33px;
+  }
+}
+.about-kmd-block p {
+  padding-top: 10px;
+}
+.about-kmd-block .subIntro.last {
+  padding-bottom: 15px;
+}
+#search-form-mobile {
+  top: 64px;
+  z-index: 1000;
+}
+
+@media only screen and (max-width : 767px) {
+  .connection-status {
+    margin-top: 54px;
   }
 }
 
