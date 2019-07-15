@@ -203,6 +203,9 @@
     width: calc(100% - 40px);
     display: inline-block;
   }
+  #search.loading {
+    width: calc(100% - 40px) !important;
+  }
   .search--dropdown {
     border: solid 1px rgba(255, 255, 255, 0.3);
     border-top-right-radius: 0;
@@ -224,6 +227,9 @@
 @media (min-width: 992px) {
   #search {
     width: calc(300px - 30px);
+  }
+  #search.loading {
+    width: calc(300px - 30px) !important;
   }
   .search--dropdown {
     padding: 6px;
