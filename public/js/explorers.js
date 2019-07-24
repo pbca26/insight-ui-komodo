@@ -56,6 +56,7 @@ var _explorers = {
     url: 'https://rick.kmd.dev',
   },
   VOTE2019: 'https://vote2019.world',
+  LABS: 'https://labs.explorer.dexstats.info',
 };
 
 var explorers = [];
