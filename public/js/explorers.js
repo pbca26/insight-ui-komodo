@@ -31,7 +31,6 @@ var _explorers = {
   EQL: 'https://eql.kmdexplorer.io',
   VRSC: 'https://vrsc.kmdexplorer.io',
   ZILLA: 'https://zilla.kmdexplorer.io',
-  MGNX: 'http://mgnx.explorer.dexstats.info',
   CCL: 'https://ccl.kmdexplorer.io',
   PIRATE: 'http://pirate.explorer.dexstats.info',
   DION: 'https://explorer.dionpay.com',
