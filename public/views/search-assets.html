@@ -3,19 +3,19 @@
   <h1>
     <span translate>Assets</span>
   </h1>
-  <div class="text-muted" data-ng-if="loading">
-    <span translate>Searching Address Balances and Transactions</span> <span class="loader-gif"></span>
+  <div class="text-muted" data-ng-if="balanceLoading || transactionsLoading">
+    <span translate>Searching Address Balances and Transactions...</span>
   </div>
-  <div data-ng-if="address">
+  <div data-ng-if="address && !balanceLoading && !transactionsLoading">
     <div class="well well-sm ellipsis">
       <strong translate>Address</strong> 
       <span class="text-muted">{{address}}</span>
       <span class="btn-copy" clip-copy="address"></span>
     </div>
   </div>
-  <div class="assets-search-balance" data-ng-if="address && balance.length > 0">
-    <h2 translate>Balance</h2>
-    <div class="row">
+  <div class="assets-search-balance">
+    <h2 translate>Balance</h2> <span class="loader-gif" data-ng-if="balanceLoading"></span>
+    <div class="row" data-ng-if="address && balance.length > 0">
       <div class="col-md-10">
         <table class="table assets-table-balance">
           <thead>
@@ -44,9 +44,9 @@
       </div>
     </div>
   </div>
-  <div data-ng-if="address && transactions.length > 0">
-    <h2 translate>Transactions</h2>    
-    <div class="row" when-scrolled="loadMore()">
+  <div>
+    <h2 translate>Transactions</h2> <span class="loader-gif" data-ng-if="transactionsLoading"></span>
+    <div class="row" data-ng-if="address && transactions.length > 0" when-scrolled="loadMore()">
       <div class="col-md-10">
         <table class="table assets-table-transactions">
           <thead>
@@ -78,7 +78,7 @@
       </div>
     </div>
   </div>
-  <div ng-if="!loading && !transactions.length && !balance.length">
+  <div ng-if="!balanceLoading && !transactionsLoading && !transactions.length && !balance.length">
     <div class="no-matching text-danger" translate>No matching results found!</div>
   </div>
 </section>

@@ -203,7 +203,8 @@ angular.module('insight.blocks').controller('BlocksController',
 
 angular.module('insight.searchAssets').controller('AssetsSearchController',
   function($scope, $rootScope, $routeParams, $location, $http) {
-  $scope.loading = true;
+  $scope.balanceLoading = true;
+  $scope.transactionsLoading = true;
   $scope.balance = [];
   $scope.transactions = [];
   $scope.transactionsAll = [];
@@ -248,7 +249,7 @@ angular.module('insight.searchAssets').controller('AssetsSearchController',
 
   if ($routeParams.address &&
       $routeParams.address.length === 34) {
-    $http.get('https://www.atomicexplorer.com/api/explorer/search?term=' + $routeParams.address).then(function(response) {
+    $http.get('https://www.atomicexplorer.com/api/explorer/search?term=' + $routeParams.address + '&transactions=false').then(function(response) {
     //$http.get('/public/js/search.mock.json').then(function(response) {
       if (response.data &&
           response.data.msg &&
@@ -261,24 +262,38 @@ angular.module('insight.searchAssets').controller('AssetsSearchController',
           }
         }
 
-        for (var i = 0; i < response.data.result.transactions.length; i++) {
-          if (response.data.result.transactions[i] !== 'error' &&
-              response.data.result.transactions[i].coin !== 'CHIPS') {
-            $scope.transactionsAll.push(response.data.result.transactions[i]);
-          }
-        }
-
-        $scope.transactions = $scope.transactions.concat($scope.transactionsAll.slice($scope.txChunk, $scope.txChunkSize));
-
-        $scope.loading = false;
+        $scope.balanceLoading = false;
       } else {
-        $scope.loading = false;
+        $scope.balanceLoading = false;
       }
 
       $scope.address = $routeParams.address;
     });
+
+    $http.get('https://www.atomicexplorer.com/api/explorer/search?term=' + $routeParams.address + '&balance=false').then(function(response) {
+      //$http.get('/public/js/search.mock.json').then(function(response) {
+        if (response.data &&
+            response.data.msg &&
+            response.data.msg === 'success') {
+          for (var i = 0; i < response.data.result.transactions.length; i++) {
+            if (response.data.result.transactions[i] !== 'error' &&
+                response.data.result.transactions[i].coin !== 'CHIPS') {
+              $scope.transactionsAll.push(response.data.result.transactions[i]);
+            }
+          }
+  
+          $scope.transactions = $scope.transactions.concat($scope.transactionsAll.slice($scope.txChunk, $scope.txChunkSize));
+  
+          $scope.transactionsLoading = false;
+        } else {
+          $scope.transactionsLoading = false;
+        }
+  
+        $scope.address = $routeParams.address;
+      });
   } else {
-    $scope.loading = false;
+    $scope.transactionsLoading = false;
+    $scope.balanceLoading = false;
     $scope.transactions = [];
     $scope.balance = [];
   }
@@ -867,6 +882,7 @@ angular.module('insight.search').controller('SearchController',
       if (q &&
           q.length === 34) { // address search only
         $location.path('search/assets/' + q);
+        $scope.loading = false;
       } else {
         _badQuery();
       }
