@@ -304,6 +304,8 @@ angular.module('insight.charts').controller('ChartsController',
   function($scope, $rootScope, $routeParams, $location, Chart, Charts) {
   $scope.loading = false;
 
+  if (!$routeParams.chartType) $routeParams.chartType = 'difficulty';
+
   $scope.list = function() {
     Charts.get({
     }, function(res) {
@@ -946,15 +948,15 @@ angular.module('insight.status').controller('StatusController',
 
     $scope.getStatus = function(q) {
       Status.get({
-          q: 'get' + q
-        },
-        function(d) {
-          $scope.loaded = 1;
-          angular.extend($scope, d);
-        },
-        function(e) {
-          $scope.error = 'API ERROR: ' + e.data;
-        });
+        q: 'get' + q
+      },
+      function(d) {
+        $scope.loaded = 1;
+        angular.extend($scope, d);
+      },
+      function(e) {
+        $scope.error = 'API ERROR: ' + e.data;
+      });
     };
 
     $scope.humanSince = function(time) {
@@ -978,7 +980,6 @@ angular.module('insight.status').controller('StatusController',
     socket.on('connect', function() {
       _startSocket();
     });
-
 
     $scope.getSync = function() {
       _startSocket();
