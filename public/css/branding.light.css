@@ -1,0 +1,526 @@
+/*
+  TODO: get rid of important
+*/
+
+.light {
+  font-family: 'Rubik';
+  background-color: #F5F5F5;
+  color: #182331;  
+}
+
+.light h1,
+.light h2,
+.light h3,
+.light h4 {
+  font-family: 'Rubik';
+  color: #182331;
+}
+
+.light a {
+  color: #182331;
+}
+
+.light .navbar-default {
+  background-color: #fff;
+  box-shadow: 1px 0px 8px rgba(168, 168, 168, 0.4);
+}
+
+.light .navbar-default a {
+  color: #182331 !important;
+  font-size: 14px;
+}
+
+.light .navbar-default a:hover,
+.light .navbar-default a:active,
+.light .navbar-default a:focus {
+  color: #182331 !important;
+  background: linear-gradient(to top, #182331 0, #182331 0.25em, transparent 0.25em, transparent 100%) !important;
+}
+
+.light .explorers--dropdown .dropdown-toggle-trigger:hover {
+  color: #182331 !important;
+  background: linear-gradient(to top, #182331 0, #182331 3px, transparent 3px, transparent 100%) !important;
+}
+
+.light .navbar-default .dropdown-toggle-trigger.explorers-selector {
+  font-size: 20px;
+}
+
+.light .explorers-selector .dropdown .dropdown-toggle,
+.light .explorers--dropdown.open .dropdown-menu-block {
+  background: #fff !important;
+}
+
+.light .dropdown .dropdown-toggle {
+  background-color: #fff !important;
+}
+
+.light .dropdown.open .dropdown-toggle {
+  background: none !important;
+}
+
+.light .dropdown-menu {
+  padding: 0;
+}
+
+.light .navbar-default .dropdown-menu > li > a {
+  color: #182331 !important;
+  background-color: #fff;
+}
+
+.light .dropdown-menu > li > a:hover,
+.light .dropdown-menu > li > a:focus {
+  background: none !important;
+  background-color: #f3f4f5 !important;
+  color: #182331 !important;
+}
+
+.light .explorers--dropdown.open .dropdown-toggle-trigger {
+  background: none !important;
+  background-color: #f8f9fa;
+  color: #9e9e9e !important;
+}
+
+.light .dropdown-menu-block {
+  background-color: #fff;
+}
+
+.light .search--dropdown.open .dropdown-menu-block > li {
+  color: #6d6d6d !important;
+}
+
+.light .dropdown-menu-block > li > a:hover,
+.light .dropdown-menu-block > li > a:focus {
+  background: none !important;
+  color: #182331 !important;
+  background-color: #f3f4f5 !important;
+}
+
+.light .dropdown-menu-block input {
+  top: 64px;
+  border-top: solid 1px rgba(255, 255, 255, 0.2);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.2)
+}
+
+.light .explorers--dropdown.open .dropdown-toggle-trigger.explorers-selector {
+  color: #182331 !important;
+}
+
+.light .btn-primary {
+  border-radius: 4px;
+  font-size: 1em !important;
+  color: #fff;
+  background-color: #ababab;
+  border-color: #ababab;
+  padding: 6px 16px;
+}
+
+.light .btn-primary:hover,
+.light .btn-primary:active,
+.light .btn-primary:focus {
+  color: #fff;
+  background-color: #ababab;
+  border-color: #ababab;
+}
+
+.light .btn-default {
+  border-radius: 4px!important;
+  color: #fff !important;
+  border-color: #ababab;
+  background: #ababab;
+}
+
+.light input[type="text"] {
+  color: #182331 !important;
+  background: #E6E6E6 !important;
+  border: none;
+}
+
+.light .dropdown-menu-block .no-match {
+  color: #182331;
+}
+
+.light .dropdown-currency .dropdown-menu {
+  border-top: solid 1px rgba(255, 255, 255, 0.2);
+  top: 65px;
+  background: #fff;
+  padding-bottom: 10px;
+}
+
+.light .dropdown-menu-group {
+  color: #182331 !important;
+  background-color: #fff !important;
+}
+
+.light #footer {
+  background: #fff;
+}
+
+.light #footer .links,
+.light #footer a,
+.light #footer a:visited {
+  color: #182331;
+}
+
+.light #footer .languages a {
+  color: #B7BBBF;
+}
+
+.light #footer .links {
+  font-size: 12px;
+}
+
+.light #footer a.selected {
+  color: #182331;
+}
+
+.light #footer a:hover {
+  color: #182331;
+}
+
+.light .modal-open .modal-header {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background: #fff;
+}
+
+.light .modal-open .modal-header h3 { 
+  color: #fff;
+}
+
+.light .modal-content {
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.light .modal-header,
+.light .modal-footer {
+  border: none;
+}
+
+.light #home .btn-more {
+  border: none;
+  padding-bottom: 25px;
+}
+
+.light #search {
+  box-shadow: none;
+}
+
+.light #search::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(0, 0, 0, 0.5);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.light #search:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgba(0, 0, 0, 0.5);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.light #search::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgba(0, 0, 0, 0.5);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.light #search.loading {
+  background-image: url(../img/loading.gif) !important;
+  background-position: 5px center !important;
+  background-repeat: no-repeat !important;
+  width: calc(100% - 30px);
+}
+
+.light .txvalues-success {
+  background-color: #17a2b8;
+}
+
+.light .txvalues-primary {
+  background-color: #28a745;
+}
+
+.light .txvalues-danger {
+  background-color: #DC0333;
+}
+
+.light .text-success {
+  color: #2FEA8B;
+}
+
+.light .txvalues-default {
+  background: #fff;
+}
+
+.light .btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.light .progress-bar-info {
+  background-color: #28a745;
+}
+
+.light #ngProgress {
+  background-color: #20c997 !important;
+}
+
+.light .status {
+  background: #3CC9BF;
+}
+
+.light #powered a.komodoplatform {
+  background-size: 145px;
+  background-color: #fff;
+  position: relative;
+  top: 5px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background-image: url(../img/komodoplatform-white.png);
+}
+
+.light .about-kmd-block {
+  padding-bottom: 0;
+}
+
+.light .btn-calendar {
+  font-size: 14px !important;
+  padding: 2px 6px;
+  margin-left: 5px;
+  border-radius: 6px !important;
+}
+
+.light .no_matching.text-danger {
+  z-index: 10;
+}
+
+.light #search-form-mobile {
+  margin-top: 0;
+  position: fixed;
+  width: 100%;
+  left: 0;
+}
+
+.light .block-id h3 {
+  color: #fff;
+}
+
+.light .charts-block .btn-primary {
+  padding: 6px 8px;
+}
+
+.light .search--dropdown {
+  background: #E6E6E6 !important;
+}
+
+.light .search--dropdown .dropdown-menu-block {
+  background: #E6E6E6 !important;
+}
+
+.light .search--dropdown .dropdown-menu-block li:hover,
+.light .search--dropdown .dropdown-menu-block li:focus {
+  color: #6d6d6d !important;
+}
+
+.light .search--dropdown .search-selector .caret {
+  color: #6d6d6d;
+}
+
+.light .search--dropdown {
+  border-left: solid 1px rgba(255, 255, 255, 0.5);
+}
+
+.light .adrotator-container {
+  border: 1px dashed #B7BBBF;
+}
+
+.light .table-striped > tbody > tr:nth-child(odd) > td,
+.light .table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #fff;
+}
+.light .table-striped > tbody > tr:nth-child(even) > td,
+.light .table-striped > tbody > tr:nth-child(even) > th {
+  background-color: #ececec;
+}
+.light .table-striped a {
+  color: #182331;
+}
+.light .table-striped > thead > tr > th,
+.light .table-striped > tbody > tr > th,
+.light .table-striped > tfoot > tr > th,
+.light .table-striped > thead > tr > td,
+.light .table-striped > tbody > tr > td,
+.light .table-striped > tfoot > tr > td {
+  border-top: none;
+}
+.light .table > thead > tr > th,
+.light .table > tbody > tr > th,
+.light .table > tfoot > tr > th,
+.light .table > thead > tr > td,
+.light .table > tbody > tr > td,
+.light .table > tfoot > tr > td {
+  padding: 12px 8px;
+}
+.light .table-striped > thead > tr > th {
+  background-color: #FFFFFF;
+  border-bottom: none;
+  padding: 12px;
+}
+.light .table-striped {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+}
+.light .table {
+  background: #fff;
+}
+.light .table tr:first-child td {
+  border-top: none;
+}
+
+.light a {
+  color: #536a84;
+}
+
+.light #intro {
+  color: #B7BBBF;
+}
+
+.light .sub-intro {
+  line-height: 24px;
+}
+
+.light textarea {
+  background: #364C65;
+  color: #fff;
+  border: none;
+}
+
+/* charts */
+.light .c3 path,
+.light .c3 line {
+  stroke: #182331;
+}
+.light .c3-chart-arcs .c3-chart-arcs-gauge-unit {
+  fill: #182331;
+}
+.light .c3-chart-arc .c3-gauge-value {
+  fill: #182331;
+}
+.light .c3-axis tspan {
+  fill: #182331;
+}
+.light .c3-legend-item text {
+  fill: #182331;
+}
+.light .block-id {
+  background-color: #B7BBBF;
+  border: none;
+  padding: 8px;
+}
+
+.light .block-tx,
+.light .well {
+  background-color: #fff;
+  border: none;
+}
+.light .transaction-vin-vout.panel.panel-default {
+  background: none;
+  border: solid 1px #B7BBBF;
+}
+.light .panel.panel-default {
+  background: none;
+  border: solid 1px #B7BBBF;
+}
+.light .secondary_navbar {
+  background: #fff;
+  border-top: solid 1px rgba(255, 255, 255, 0.2);
+  z-index: 2000;
+}
+.light .hide_snavbar {
+  background: #fff;
+}
+.light .line-bot {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.light .line-top {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.light .lead.glyphicon.glyphicon-chevron-right,
+.light .lead.glyphicon.glyphicon-chevron-left {
+  margin-bottom: 0;
+  position: relative;
+  top: 9px;
+}
+.light .lead {
+  color: #6d6d6d;
+}
+.light .text-muted {
+  color: #6d6d6d;
+}
+.light .flash-message {
+  margin-left: 15px;
+}
+.light .connection-status.container {
+  padding-right: 29px;
+}
+.light .col-gray {
+  background: #E6E6E6;
+  border: none;
+}
+.light #powered .powered-text {
+  border: none;
+}
+.light #powered .powered-text small {
+  background-color: #151d27;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  color: #c8cbce;
+  padding: 6px 12px;
+  position: relative;
+  z-index: 10;
+}
+.light #powered a {
+  height: 90px;
+}
+.light #powered a.komodoplatform {
+  background-size: 215px;
+  background-color: #fff;
+  position: relative;
+  top: -22px;
+  border-radius: 0;
+  background-image: url(../img/komodoplatform-black.png);
+  box-shadow: 1px 0px 8px rgba(168, 168, 168, 0.4);
+}
+
+.light .btn-more {
+  width: 100%;
+}
+
+.light .btn-more .line {
+  border-top: 2px solid rgba(0, 0, 0, 0.05);
+  position: absolute;
+  left: 15px;
+  margin-top: 9px;
+  width: 95%;
+}
+
+.light .btn-more a {
+  position: relative;
+  z-index: 10;
+  padding: 0 12px;
+  color: #41EAD4;
+  background: #F5F5F5;
+}
+
+@media only screen and (max-width : 767px) {
+  .light #wrap > .container {
+    padding: 64px 15px 0;
+  }
+  .light #search {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}
