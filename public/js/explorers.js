@@ -57,6 +57,7 @@ var _explorers = {
   VOTE2019: 'https://vote2019.world',
   LABS: 'https://labs.explorer.dexstats.info',
   HUSH: 'https://explorer.myhush.org',
+  COMMOD: 'https://commod.explorer.dexstats.info',
 };
 
 var explorers = [];
