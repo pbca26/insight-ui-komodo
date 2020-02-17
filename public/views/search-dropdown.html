@@ -1,0 +1,9 @@
+<span class="search--dropdown{{isOpened ? ' open' : ''}}" ng-click="toggleSelect()">
+  <span class="search-selector">
+    <span class="caret"></span>
+  </span>
+  <ul class="dropdown-menu-block">
+    <li ng-click="toggleSearchParams()">Current coin</li>
+    <li ng-click="toggleSearchParams(true)">All coins</li>
+  </ul>
+</span>

@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="public/css/main.min.css">
     <link rel="stylesheet" href="public/css/common.min.css">
     <link rel="stylesheet" href="public/css/overrides.css">
+    <link rel="stylesheet" href="public/css/branding.css">
     <script src="public/js/explorers.js"></script>
     <script src="public/js/url.params.js"></script>
   </head>
-  <body ng-cloak class="ng-cloak">
+  <body id="body" ng-cloak class="ng-cloak">
     <div>
       <script type="text/ng-template" id="scannerModal.html">
         <div class="modal-header">
@@ -41,7 +42,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-default" data-ng-click="cancel()" data-dismiss="modal">Close</button>
+          <button ng-if="$root.theme === 'light'" class="btn btn-default" data-ng-click="cancel()" data-dismiss="modal">Close</button>
+          <button ng-if="$root.theme === 'dark'" class="btn btn-primary" data-ng-click="cancel()" data-dismiss="modal">Close</button>
         </div>
       </script>
     </div>

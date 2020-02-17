@@ -25,7 +25,8 @@ angular.module('insight',[
   'insight.status',
   'insight.connection',
   'insight.currency',
-  'insight.messages'
+  'insight.messages',
+  'insight.searchAssets'
 ]);
 
 angular.module('insight.system', []);
@@ -39,6 +40,7 @@ angular.module('insight.status', []);
 angular.module('insight.connection', []);
 angular.module('insight.currency', []);
 angular.module('insight.messages', []);
+angular.module('insight.searchAssets', []);
 
 // Source: public/src/js/controllers/address.js
 angular.module('insight.address').controller('AddressController',
@@ -199,10 +201,110 @@ angular.module('insight.blocks').controller('BlocksController',
 
 });
 
+angular.module('insight.searchAssets').controller('AssetsSearchController',
+  function($scope, $rootScope, $routeParams, $location, $http) {
+  $scope.balanceLoading = true;
+  $scope.transactionsLoading = true;
+  $scope.balance = [];
+  $scope.transactions = [];
+  $scope.transactionsAll = [];
+  $scope.txChunkSize = 10;
+  $scope.txChunk = 0;
+
+  // ref: https://github.com/pbca26/agama-wallet-lib/blob/dev/src/time.js#L1
+  $scope.secondsToString = function(seconds, skipMultiply, showSeconds) {
+    var a = new Date(seconds * (skipMultiply ? 1 : 1000));
+    var months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours() < 10 ? `0${a.getHours()}` : a.getHours();
+    var min = a.getMinutes() < 10 ? `0${a.getMinutes()}` : a.getMinutes();
+    var sec = a.getSeconds();
+    var time = `${date} ${month} ${year} ${hour}:${min}${(showSeconds ? `:${sec}` : '')}`;
+  
+    return time;
+  };
+
+  $scope.loadMore = function() {
+    if ($scope.txChunkSize * $scope.txChunk < $scope.transactionsAll.length) {
+      $scope.txChunk++;
+    }
+
+    $scope.transactions = $scope.transactions.concat($scope.transactionsAll.slice($scope.txChunkSize * $scope.txChunk, $scope.txChunkSize * ($scope.txChunk + 1)));
+  }
+
+  if ($routeParams.address &&
+      $routeParams.address.length === 34) {
+    $http.get('https://www.atomicexplorer.com/api/explorer/search?term=' + $routeParams.address + '&transactions=false').then(function(response) {
+    //$http.get('/public/js/search.mock.json').then(function(response) {
+      if (response.data &&
+          response.data.msg &&
+          response.data.msg === 'success') {
+        for (var i = 0; i < response.data.result.balance.length; i++) {
+          if (response.data.result.balance[i] !== 'error' &&
+              response.data.result.balance[i].coin !== 'CHIPS' &&
+              (response.data.result.balance[i].balance.confirmed > 0 || response.data.result.balance[i].balance.unconfirmed > 0)) {
+            $scope.balance.push(response.data.result.balance[i]);
+          }
+        }
+
+        $scope.balanceLoading = false;
+      } else {
+        $scope.balanceLoading = false;
+      }
+
+      $scope.address = $routeParams.address;
+    });
+
+    $http.get('https://www.atomicexplorer.com/api/explorer/search?term=' + $routeParams.address + '&balance=false').then(function(response) {
+      //$http.get('/public/js/search.mock.json').then(function(response) {
+        if (response.data &&
+            response.data.msg &&
+            response.data.msg === 'success') {
+          for (var i = 0; i < response.data.result.transactions.length; i++) {
+            if (response.data.result.transactions[i] !== 'error' &&
+                response.data.result.transactions[i].coin !== 'CHIPS') {
+              $scope.transactionsAll.push(response.data.result.transactions[i]);
+            }
+          }
+  
+          $scope.transactions = $scope.transactions.concat($scope.transactionsAll.slice($scope.txChunk, $scope.txChunkSize));
+  
+          $scope.transactionsLoading = false;
+        } else {
+          $scope.transactionsLoading = false;
+        }
+  
+        $scope.address = $routeParams.address;
+      });
+  } else {
+    $scope.transactionsLoading = false;
+    $scope.balanceLoading = false;
+    $scope.transactions = [];
+    $scope.balance = [];
+  }
+});
+
 // Source: public/src/js/controllers/charts.js
 angular.module('insight.charts').controller('ChartsController',
   function($scope, $rootScope, $routeParams, $location, Chart, Charts) {
   $scope.loading = false;
+
+  if (!$routeParams.chartType) $routeParams.chartType = 'difficulty';
 
   $scope.list = function() {
     Charts.get({
@@ -300,6 +402,8 @@ angular.module('insight.connection').controller('ConnectionController',
 angular.module('insight.currency').controller('CurrencyController',
   function($scope, $rootScope, Currency) {
     $rootScope.currency.symbol = defaultCurrency;
+    $rootScope.theme = 'dark';
+    document.getElementById('body').className += ' dark';
 
     var _roundFloat = function(x, n) {
       if(!parseInt(n, 10) || !parseFloat(x)) n = 0;
@@ -352,6 +456,16 @@ angular.module('insight.currency').controller('CurrencyController',
         $rootScope.currency.factor = 1;
       }
     };
+
+    $scope.setTheme = function(theme) {
+      document.getElementById('body').className = document.getElementById('body').className.replace('dark', '');
+
+      if (theme === 'dark') {
+        document.getElementById('body').className += ' dark';
+      }
+
+      $rootScope.theme = theme;
+    }
 
     // Get initial value
     Currency.get({}, function(res) {
@@ -483,8 +597,19 @@ var TRANSACTION_DISPLAYED = 10;
 var BLOCKS_DISPLAYED = 5;
 
 angular.module('insight.system').controller('IndexController',
-  function($scope, Global, getSocket, Blocks) {
+  function($scope, $rootScope, $http, Global, getSocket, Blocks) {
     $scope.global = Global;
+
+    var _getNota = function() {
+      $http.get('https://' + $rootScope.coin + '.explorer.dexstats.info/insight-api-komodo/status?q=getInfo').then(function(response) {
+        if (response &&
+            response.data &&
+            response.data.info &&
+            response.data.info.notarized) {
+          $rootScope.notarized = response.data.info.notarized;
+        }
+      });
+    };
 
     var _getBlocks = function() {
       Blocks.get({
@@ -508,6 +633,7 @@ angular.module('insight.system').controller('IndexController',
 
       socket.on('block', function() {
         _getBlocks();
+        _getNota();
       });
     };
 
@@ -732,7 +858,7 @@ angular.module('insight.system').controller('ScannerController',
 
 // Source: public/src/js/controllers/search.js
 angular.module('insight.search').controller('SearchController',
-  function($scope, $routeParams, $location, $timeout, Global, Block, Transaction, Address, BlockByHeight) {
+  function($scope, $routeParams, $rootScope, $location, $timeout, Global, Block, Transaction, Address, BlockByHeight) {
   $scope.global = Global;
   $scope.loading = false;
 
@@ -754,62 +880,83 @@ angular.module('insight.search').controller('SearchController',
     $scope.badQuery = false;
     $scope.loading = true;
 
-    Block.get({
-      blockHash: q
-    }, function() {
-      _resetSearch();
-      $location.path('block/' + q + '/coin/' + $rootScope.coin);
-    }, function() { //block not found, search on TX
-      Transaction.get({
-        txId: q
+    if ($rootScope.searchAssets) {
+      if (q &&
+          q.length === 34) { // address search only
+        $location.path('search/assets/' + q);
+        $scope.loading = false;
+      } else {
+        _badQuery();
+      }
+    } else {
+      Block.get({
+        blockHash: q
       }, function() {
         _resetSearch();
-        $location.path('tx/' + q + '/coin/' + $rootScope.coin);
-      }, function() { //tx not found, search on Address
-        Address.get({
-          addrStr: q
+        $location.path('block/' + q + '/coin/' + $rootScope.coin);
+      }, function() { //block not found, search on TX
+        Transaction.get({
+          txId: q
         }, function() {
           _resetSearch();
-          $location.path('address/' + q + '/coin/' + $rootScope.coin);
-        }, function() { // block by height not found
-          if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
-            BlockByHeight.get({
-              blockHeight: q
-            }, function(hash) {
-              _resetSearch();
-              $location.path('/block/' + hash.blockHash + '/coin/' + $rootScope.coin);
-            }, function() { //not found, fail :(
+          $location.path('tx/' + q + '/coin/' + $rootScope.coin);
+        }, function() { //tx not found, search on Address
+          Address.get({
+            addrStr: q
+          }, function() {
+            _resetSearch();
+            $location.path('address/' + q + '/coin/' + $rootScope.coin);
+          }, function() { // block by height not found
+            if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
+              BlockByHeight.get({
+                blockHeight: q
+              }, function(hash) {
+                _resetSearch();
+                $location.path('/block/' + hash.blockHash + '/coin/' + $rootScope.coin);
+              }, function() { //not found, fail :(
+                $scope.loading = false;
+                _badQuery();
+              });
+            }
+            else {
               $scope.loading = false;
               _badQuery();
-            });
-          }
-          else {
-            $scope.loading = false;
-            _badQuery();
-          }
+            }
+          });
         });
       });
-    });
+    }
   };
 
 });
 
 // Source: public/src/js/controllers/status.js
 angular.module('insight.status').controller('StatusController',
-  function($scope, $routeParams, $location, Global, Status, Sync, getSocket) {
+  function($scope, $routeParams, $rootScope, $http, $location, Global, Status, Sync, getSocket) {
     $scope.global = Global;
+
+    var _getNota = function() {
+      $http.get('https://' + $rootScope.coin + '.explorer.dexstats.info/insight-api-komodo/status?q=getInfo').then(function(response) {
+        if (response &&
+            response.data &&
+            response.data.info &&
+            response.data.info.notarized) {
+          $rootScope.notarized = response.data.info.notarized;
+        }
+      });
+    };
 
     $scope.getStatus = function(q) {
       Status.get({
-          q: 'get' + q
-        },
-        function(d) {
-          $scope.loaded = 1;
-          angular.extend($scope, d);
-        },
-        function(e) {
-          $scope.error = 'API ERROR: ' + e.data;
-        });
+        q: 'get' + q
+      },
+      function(d) {
+        $scope.loaded = 1;
+        angular.extend($scope, d);
+      },
+      function(e) {
+        $scope.error = 'API ERROR: ' + e.data;
+      });
     };
 
     $scope.humanSince = function(time) {
@@ -819,6 +966,7 @@ angular.module('insight.status').controller('StatusController',
 
     var _onSyncUpdate = function(sync) {
       $scope.sync = sync;
+      _getNota();
     };
 
     var _startSocket = function () {
@@ -832,7 +980,6 @@ angular.module('insight.status').controller('StatusController',
     socket.on('connect', function() {
       _startSocket();
     });
-
 
     $scope.getSync = function() {
       _startSocket();
@@ -1295,6 +1442,46 @@ angular.module('insight.transactions')
 var ZeroClipboard = window.ZeroClipboard;
 
 angular.module('insight')
+  .directive('searchSelector', function($document, $rootScope) {
+    return {
+      restrict: 'E',
+      require: '?ngModel',
+      scope: {
+        coin: '=',
+      },
+      templateUrl: 'public/views/search-dropdown.html',
+      replace: true,
+      link: function(scope, element, attr) {
+        scope.isOpened = false;
+
+        scope.toggleSearchParams = function(param) {
+          $rootScope.searchAssets = param;
+        }
+
+        scope.toggleSelect = function() {
+          scope.isOpened = !scope.isOpened;
+          document.getElementById('ngProgress-container').style.display = scope.isOpened ? 'none' : 'block';
+        }
+
+        $document.bind('click', function(event) {
+          var isParentNodeClicked = false;
+          
+          for (var i = 0; i < event.path.length; i++) {
+            if (event.path[i].className &&
+                event.path[i].className.indexOf('search--dropdown') > -1) {
+              isParentNodeClicked = true;
+            }
+          }
+
+          if (!isParentNodeClicked) {
+            document.getElementById('ngProgress-container').style.display = 'block';
+            scope.isOpened = false;
+            scope.$apply();
+          }
+        });
+      }
+    };
+  })
   .directive('explorerSelector', function($document) {
     return {
       restrict: 'E',
@@ -1456,6 +1643,10 @@ angular.module('insight')
 //Setting up route
 angular.module('insight').config(function($routeProvider) {
   $routeProvider.
+    when('/search/assets/:address', {
+      templateUrl: 'public/views/search-assets.html',
+      title: 'Komodo Asset Chains Search '
+    }).
     when('/block/:blockHash/coin/:coin', {
       templateUrl: 'public/views/block.html',
       title: 'Komodo Block '

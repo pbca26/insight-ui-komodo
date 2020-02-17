@@ -1,0 +1,84 @@
+<div data-ng-include src="'public/views/includes/connection.html'"></div>
+<section data-ng-controller="AssetsSearchController">
+  <h1>
+    <span translate>Assets</span>
+  </h1>
+  <div class="text-muted" data-ng-if="balanceLoading || transactionsLoading">
+    <span translate>Searching Address Balances and Transactions...</span>
+  </div>
+  <div data-ng-if="address && !balanceLoading && !transactionsLoading">
+    <div class="well well-sm ellipsis">
+      <strong translate>Address</strong> 
+      <span class="text-muted">{{address}}</span>
+      <span class="btn-copy" clip-copy="address"></span>
+    </div>
+  </div>
+  <div class="assets-search-balance">
+    <h2 translate>Balance</h2> <span class="loader-gif" data-ng-if="balanceLoading"></span>
+    <div class="row" data-ng-if="address && balance.length > 0">
+      <div class="col-md-10">
+        <table class="table assets-table-balance">
+          <thead>
+            <tr>
+              <td class="text-left">
+                <strong translate>Coin</strong>
+              </td>
+              <td>
+                <strong translate>Confirmed</strong>
+              </td>
+              <td class="hidden-xs">
+                <strong translate>Unconfirmed</strong>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat='b in balance'>
+              <td>
+                <a href="/address/{{address}}/coin/{{b.coin}}" target="_blank"><img ng-src="public/img/coins/{{b.coin.toLowerCase()}}.png" alt="{{b.coin}}"> {{b.coin}}</a>
+              </td>
+              <td>{{b.balance.confirmed}}</td>
+              <td class="hidden-xs">{{b.balance.unconfirmed > 0 ? b.balance.unconfirmed : ''}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h2 translate>Transactions</h2> <span class="loader-gif" data-ng-if="transactionsLoading"></span>
+    <div class="row" data-ng-if="address && transactions.length > 0" when-scrolled="loadMore()">
+      <div class="col-md-10">
+        <table class="table assets-table-transactions">
+          <thead>
+            <tr>
+              <td class="text-left">
+                <strong translate>Coin</strong>
+              </td>
+              <td>
+                <strong translate>Date</strong>
+              </td>
+              <td>
+                <strong translate>Transaction ID</strong>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat='t in transactions'>
+              <td>
+                <img ng-src="public/img/coins/{{t.coin.toLowerCase()}}.png" alt="{{t.coin}}">
+                <span class="hidden-xs">{{t.coin}}</span>
+              </td>
+              <td>{{secondsToString(t.timestamp)}}</td>
+              <td>
+                <a href="/tx/{{t.txid}}/coin/{{t.coin}}" target="_blank">{{t.txid}}</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div ng-if="!balanceLoading && !transactionsLoading && !transactions.length && !balance.length">
+    <div class="no-matching text-danger" translate>No matching results found!</div>
+  </div>
+</section>

@@ -11,7 +11,7 @@
       </div>
       <p class="lead text-center m20v">
       {{pagination.current}} UTC
-      <a href="#" class="btn btn-primary btn-xs" datepicker-popup show-button-bar="false" data-ng-click="openCalendar($event)" data-ng-model="dt" is-open="opened" data-ng-required="true"><span class="glyphicon glyphicon-calendar"></span></a>
+      <a href="#" class="btn btn-primary btn-xs btn-calendar" datepicker-popup show-button-bar="false" data-ng-click="openCalendar($event)" data-ng-model="dt" is-open="opened" data-ng-required="true"><span class="glyphicon glyphicon-calendar"></span></a>
       </p>
       <div class="m20v text-center text-muted" data-ng-if="!pagination.current">
         <span translate>Loading Selected Date...</span>
@@ -41,7 +41,8 @@
             <th translate>Timestamp</th>
             <th class="text-right" translate>Transactions</th>
             <th class="text-right hidden-xs" translate>Mined by</th>
-            <th class="text-right" translate>Size</th>
+            <th class="text-right hidden-xs" translate>Size</th>
+            <th class="text-right" data-ng-show="$root.notarized" translate>Notarized</th>
           </tr>
         </thead>
         <tbody>
@@ -53,7 +54,9 @@
           <td>{{b.time * 1000 | date:'medium'}}</td>
           <td class="text-right">{{b.txlength}}</td>
           <td class="text-right hidden-xs"><a href="{{b.poolInfo.url}}" title="{{b.poolInfo.poolName}}" target="_blank" data-ng-show="b.poolInfo">{{b.poolInfo.poolName}}</a></td>
-          <td class="text-right">{{b.size}}</td>
+          <td class="text-right hidden-xs">{{b.size}}</td>
+          <td class="text-right text-success" data-ng-show="$root.notarized && b.height <= $root.notarized">Yes</td>
+          <td class="text-right" data-ng-show="$root.notarized && b.height > $root.notarized">No</td>
         </tr>
         </tbody>
       </table>

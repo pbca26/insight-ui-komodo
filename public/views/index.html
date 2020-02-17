@@ -1,4 +1,4 @@
-<div class="alert alert-danger" data-ng-show="flashMessage">
+<div class="alert alert-danger flash-message" data-ng-show="flashMessage">
   {{$root.flashMessage}}
 </div>
 <div data-ng-include src="'public/views/includes/connection.html'"></div>
@@ -24,7 +24,8 @@
               <th translate>Age</th>
               <th class="text-right"><span class="ellipsis" translate>Transactions</span></th>
               <th class="text-right hidden-xs"><span class="ellipsis" translate>Mined by</span></th>
-              <th class="text-right" translate>Size</th>
+              <th class="text-right hidden-xs" translate>Size</th>
+              <th class="text-right" data-ng-show="$root.notarized" translate>Notarized</th>
             </tr>
           </thead>
           <tbody>
@@ -37,11 +38,14 @@
             <td class="text-right">{{b.txlength}}</td>
             <td class="text-right hidden-xs"><a href="{{b.poolInfo.url}}" title="{{b.poolInfo.poolName}}" target="_blank" data-ng-show="b.poolInfo">{{b.poolInfo.poolName}}</a></td>
             <td class="text-right">{{b.size}}</td>
+            <td class="text-right text-success" data-ng-show="$root.notarized && b.height <= $root.notarized">Yes</td>
+            <td class="text-right" data-ng-show="$root.notarized && b.height > $root.notarized">No</td>
           </tr>
           </tbody>
         </table>
         <div class="btn-more">
-          <a href="blocks/coin/{{$root.coin}}" class="btn btn-default" translate>See all blocks</a>
+          <a href="blocks/coin/{{$root.coin}}" class="btn btn-default" ng-if="$root.theme === 'light'" translate>See all blocks</a>
+          <a href="blocks/coin/{{$root.coin}}" class="btn btn-primary" ng-if="$root.theme === 'dark'" translate>See all blocks</a>
         </div>
 
         <h2 translate>Latest Transactions</h2>
@@ -66,13 +70,12 @@
 
       </div>
 
-      <div class="col-xs-12 col-md-4 col-gray">
-        <h2 translate>What is Komodo?</h2>
-        <p id="intro" translate>End-to-end Blockchain Solutions Provider empowering developers to build freely
-and participate in creating the largest open blockchain network.</p>
-        <p class="subIntro" translate><a href="https://komodoplatform.com" target="_blank" title="Komodo Platform">Komodo Platform</a> strives to accelerate the adoption of blockchain technologies around the globe and to lead the world in blockchain integration. All of the Komodo’s unique and cutting-edge technologies are open-source and available to everyone.</p>
-        <p class="subIntro">With a collaborative approach, rather than a competitive one, Komodo Platform is working to unite the blockchain industry, empower business leaders and entrepreneurs, and eliminate the need for centralized third parties in financial transactions.</p>
-
+      <div class="col-xs-12 col-md-4 col-gray about-kmd-block">
+        <h2 translate>Composable Blockchain Solutions</h2>
+        <p id="intro">With Komodo, you can deploy a composable Smart Chain in minutes with seamless interoperability, atomic swaps, and Turing-complete business logic.</p>
+        <p class="subIntro" translate>Komodo’s <a href="https://komodoplatform.com/antara-framework-rebrand-ama" target="_blank" title="Antara Framework">Antara Framework</a> is an adaptable framework for simple, end-to-end blockchain development. Antara makes it easier than ever before to launch a chain, activate modules, and start building blockchain-based applications.</p>
+        <p class="subIntro last" translate>Smart Chains are compatible with Komodo’s <a href="https://komodoplatform.com/atomic-swaps" target="_blank" title="Cross-chain atomic swap technology">cross-chain atomic swap technology</a>. Next-generation wallets, such as Komodo’s <a href="https://atomicdex.io" target="_blank" title="AtomicDEX Wallet">AtomicDEX application</a>, allow users to trade assets wallet-to-wallet without any middlemen or third-parties.</p>
+        
         <p data-ng-if='currency.testnet'><strong>This explorer is currently showing the live Komodo network!</strong></p>
         <a class="twitter-timeline" href="https://twitter.com/KomodoPlatform">Tweets by KomodoPlatform</a></p>
         <div id="powered" class="row">

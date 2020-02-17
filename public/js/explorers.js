@@ -31,7 +31,6 @@ var _explorers = {
   EQL: 'https://eql.kmdexplorer.io',
   VRSC: 'https://vrsc.kmdexplorer.io',
   ZILLA: 'https://zilla.kmdexplorer.io',
-  MGNX: 'http://mgnx.explorer.dexstats.info',
   CCL: 'https://ccl.kmdexplorer.io',
   PIRATE: 'http://pirate.explorer.dexstats.info',
   DION: 'https://explorer.dionpay.com',
@@ -56,6 +55,9 @@ var _explorers = {
     url: 'https://rick.kmd.dev',
   },
   VOTE2019: 'https://vote2019.world',
+  LABS: 'https://labs.explorer.dexstats.info',
+  HUSH: 'https://explorer.myhush.org',
+  COMMOD: 'https://commod.explorer.dexstats.info',
 };
 
 var explorers = [];

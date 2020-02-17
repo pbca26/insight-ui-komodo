@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
-
 let app = express();
 
 app.use((req, res, next) => {
@@ -48,13 +47,25 @@ app.get('/block/*/coin/*', (req, res) => {
 app.get('/block-index/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/block-date/*/coin/*', (req, res) => {
+app.get('/blocks-date/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 app.get('/tx/*/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 app.get('/address/*/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/charts/*/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/charts/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/search/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/search/assets/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 

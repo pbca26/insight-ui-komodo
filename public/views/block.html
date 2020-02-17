@@ -1,5 +1,5 @@
 <div data-ng-include src="'public/views/includes/connection.html'"></div>
-<section data-ng-controller="BlocksController" data-ng-init="findOne()">
+<section data-ng-controller="BlocksController" data-ng-init="findOne()">  
   <div class="secondary_navbar hidden-xs hidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-show="block.hash" data-ng-init="hideSNavbar=0">
     <div class="container" data-ng-if="!hideSNavbar">
       <div class="row">
@@ -127,6 +127,11 @@
           <tr data-ng-show="block.nextblockhash">
             <td><strong translate>Next Block</strong></td>
             <td class="text-right"><a href="block/{{block.nextblockhash}}/coin/{{$root.coin}}">{{block.height+1}}</a></td>
+          </tr>
+          <tr data-ng-show="$root.notarized">
+            <td><strong translate>Notarized</strong></td>
+            <td class="text-right text-success" data-ng-show="block.height <= $root.notarized">Yes</td>
+            <td class="text-right" data-ng-show="block.height > $root.notarized">No</td>
           </tr>
           </tbody>
         </table>
