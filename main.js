@@ -62,12 +62,14 @@ app.get('/charts/*/coin/*', (req, res) => {
 app.get('/charts/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
+// assets search
 app.get('/search/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 app.get('/search/assets/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
+// tokens
 app.get('/tokens', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
@@ -96,7 +98,7 @@ let server;
 const config = {
   ip: 'localhost',
   https: false,
-  port: 8888,
+  port: 8889,
 };
 
 if (config.https) {

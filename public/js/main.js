@@ -1438,6 +1438,43 @@ angular.module('insight.transactions')
       return $resource(window.apiPrefix + '/txs');
   });
 
+angular.module('insight.tokens')
+  .factory('Tokens',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens');
+    })
+    .factory('TokensRichlist',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens/richlist', {
+        cctxid: '@cctxid'
+      });
+    })
+    .factory('TokensTransactions',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens/transactions/all', {
+        cctxid: '@cctxid',
+      });
+    })
+    .factory('TokenSpecificAddressBalance',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens/balance', {
+        address: '@address',
+        cctxid: '@cctxid',
+      });
+    })
+    .factory('TokensAddressBalance',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens/balance', {
+        address: '@address'
+      });
+    })
+    .factory('TokensAddressTransactions',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens/transactions', {
+        address: '@address'
+      });
+    })
+
 // Source: public/src/js/directives.js
 var ZeroClipboard = window.ZeroClipboard;
 
