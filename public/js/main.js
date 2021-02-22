@@ -1731,8 +1731,30 @@ angular.module('insight').config(function($routeProvider) {
     when('/messages/verify/coin/:coin', {
       templateUrl: 'public/views/messages_verify.html',
       title: 'Verify Message'
-    })
-    .otherwise({
+    }).
+    when('/tokens/coin/:coin', {
+      templateUrl: 'views/tokens/tokens_list.html',
+      title: 'Tokens'
+    }).
+    when('/tokens/:cctxid/transactions/coin/:coin', {
+      templateUrl: 'views/tokens/token_overview.html',
+      title: 'Token Transactions',
+      isRichlist: false,
+    }).
+    when('/tokens/:cctxid/richlist/coin/:coin', {
+      templateUrl: 'views/tokens/token_overview.html',
+      title: 'Token Richlist',
+      isRichlist: true,
+    }).
+    when('/tokens/:cctxid/address/:addrStr/coin/:coin', {
+      templateUrl: 'views/tokens/token_address.html',
+      title: 'Token Address Transactions',
+    }).
+    when('/tokens/address/:addrStr/coin/:coin', {
+      templateUrl: 'views/tokens/token_address_overview.html',
+      title: 'Token Address Overview',
+    }).
+    otherwise({
       templateUrl: 'public/views/404.html',
       title: 'Error'
     });
