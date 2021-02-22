@@ -68,6 +68,27 @@ app.get('/search/*', (req, res) => {
 app.get('/search/assets/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
+app.get('/tokens', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/tokens/*/orderbook/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/tokens/*/trades/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/tokens/*/richlist/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/tokens/*/transactions/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/tokens/*/address/*/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.get('/tokens/address/*/coin/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
