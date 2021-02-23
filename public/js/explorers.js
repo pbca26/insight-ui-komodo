@@ -53,6 +53,7 @@ var _explorers = {
   RICK: {
     apiPrefix: '/api',
     url: 'https://rick.kmd.dev',
+    isTokens: true,
   },
   VOTE2019: 'https://vote2019.world',
   LABS: 'https://labs.explorer.dexstats.info',

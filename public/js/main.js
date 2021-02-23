@@ -26,7 +26,8 @@ angular.module('insight',[
   'insight.connection',
   'insight.currency',
   'insight.messages',
-  'insight.searchAssets'
+  'insight.searchAssets',
+  'insight.tokens'
 ]);
 
 angular.module('insight.system', []);
@@ -41,6 +42,7 @@ angular.module('insight.connection', []);
 angular.module('insight.currency', []);
 angular.module('insight.messages', []);
 angular.module('insight.searchAssets', []);
+angular.module('insight.tokens', []);
 
 // Source: public/src/js/controllers/address.js
 angular.module('insight.address').controller('AddressController',
@@ -541,6 +543,7 @@ angular.module('insight.system').controller('FooterController',
 // Source: public/src/js/controllers/header.js
 angular.module('insight.system').controller('HeaderController',
   function($scope, $rootScope, $modal, getSocket, Global, Block, $location, $route) {
+    var isTokensEnabledChain = _explorers[$rootScope.coin] && _explorers[$rootScope.coin].isTokens;
     $scope.global = Global;
 
     $rootScope.currency = {
@@ -561,6 +564,13 @@ angular.module('insight.system').controller('HeaderController',
       'title': 'Status',
       'link': 'status'
     }];
+
+    if (isTokensEnabledChain) {
+      $scope.menu.push({
+        'title': 'Tokens',
+        'link': 'tokens'
+      })
+    }
 
     $scope.explorers = explorers;
 
@@ -1769,6 +1779,8 @@ angular.module('insight')
   .run(function($rootScope, $route, $location, $routeParams, $anchorScroll, ngProgress, gettextCatalog, amMoment) {
     gettextCatalog.currentLanguage = defaultLanguage;
     amMoment.changeLocale(defaultLanguage);
+    $rootScope.coin = window.netSymbol;
+    
     $rootScope.$on('$routeChangeStart', function() {
       ngProgress.start();
     });
