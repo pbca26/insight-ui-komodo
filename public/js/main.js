@@ -423,7 +423,7 @@ angular.module('insight.currency').controller('CurrencyController',
 
         if (this.symbol === 'USD') {
           response = _roundFloat((value * this.factor), 2);
-        } else if (this.symbol === 'm'+netSymbol) {
+        } else if (this.symbol === 'm' + netSymbol) {
           this.factor = 1000;
           response = _roundFloat((value * this.factor), 5);
         } else if (this.symbol === 'bits') {
@@ -434,7 +434,7 @@ angular.module('insight.currency').controller('CurrencyController',
           response = value;
         }
         // prevent sci notation
-        if (response < 1e-7) response=response.toFixed(8);
+        if (response < 1e-7) response = response.toFixed(8);
 
         return response + ' ' + this.symbol;
       }
@@ -450,7 +450,7 @@ angular.module('insight.currency').controller('CurrencyController',
         Currency.get({}, function(res) {
           $rootScope.currency.factor = $rootScope.currency.bitstamp = res.data.bitstamp;
         });
-      } else if (currency === 'm'+netSymbol) {
+      } else if (currency === 'm' + netSymbol) {
         $rootScope.currency.factor = 1000;
       } else if (currency === 'bits') {
         $rootScope.currency.factor = 1000000;
@@ -1005,6 +1005,30 @@ angular.module('insight.status').controller('StatusController',
         });
     };
   });
+
+// Source: public/src/js/controllers/tokens.js
+angular.module('insight.tokens').controller('TokensController',
+function($scope, $routeParams, $location, $interval, Global, Tokens, TokensRichlist, TokensAddressBalance, TokensAddressTransactions) {
+  var syncInterval;
+  var pageNum = -1;
+
+  $scope.global = Global;
+  $scope.loading = true;
+
+  Tokens.get({},
+    function(tokensData) {
+      console.warn('tokensData', tokensData);
+
+      $scope.tokens = tokensData.tokens;
+      $scope.loading = false;
+    },
+    function(e) {
+      var err = 'Could not get tokens information' + e.toString();
+      $scope.chart = {
+        error: err
+      };
+    });
+});
 
 // Source: public/src/js/controllers/transactions.js
 angular.module('insight.transactions').controller('transactionsController',

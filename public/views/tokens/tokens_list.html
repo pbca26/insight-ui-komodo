@@ -1,0 +1,36 @@
+<div data-ng-include src="'views/includes/connection.html'"></div>
+<section data-ng-controller="TokensController">
+  <div class="row">
+    <div class="col-xs-12 col-md-9">
+      <div class="page-header">
+        <h1>
+          <span translate>Tokens</span>
+        </h1>
+      </div>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th translate>Token</th>
+            <th translate>Supply</th>
+            <th class="text-right" translate>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-show="loading">
+          <td colspan="5"><span translate>Waiting for tokens data...</span> <span class="loader-gif"></span></td>
+        </tr>
+        <tr class="fader" data-ng-repeat='t in tokens'>
+          <td>
+            <a href="tokens/{{t.tokenid}}/transactions">{{t.name}}</a><br/>
+            <small>{{t.description}}</small>
+          </td>
+          <td>{{t.supply}}</td>
+          <td class="text-right">{{t.ownerAddress}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h2 class="text-center text-muted" data-ng-show="!tokens.length && !loading"
+    translate>No Tokens yet.</h2>
+</section>
