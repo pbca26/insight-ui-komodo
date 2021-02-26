@@ -1,0 +1,97 @@
+<div data-ng-include src="'views/includes/connection.html'"></div>
+<section data-ng-controller="TokenOverviewController">
+  <div class="secondary_navbar hidden-xs hidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-show="block.hash" data-ng-init="hideSNavbar=0">
+    <div class="container" data-ng-if="!hideSNavbar">
+      <div class="row">
+        <div class="col-md-1">
+          <a href="block/{{block.previousblockhash}}"><span class="lead glyphicon glyphicon-chevron-left"></span></a>
+        </div>
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-5">
+              <h3 class="text-left"><span translate>Token Overview</span> #{{tokenInfo.name}}</h3>
+            </div>
+            <p class="col-md-6 ellipsis text-left">
+                <strong>Hash</strong> {{block.hash}}
+            </p>
+            <div class="col-md-1 text-left">
+                <span class="btn-copy" clip-copy="block.hash"></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <a data-ng-show="block.nextblockhash" href="block/{{block.nextblockhash}}"><span class="lead glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+      </div>
+    </div> <!-- END OF CONTAINER -->
+    <div class="hide_snavbar">
+      <a href="#" data-ng-click="hideSNavbar=!hideSNavbar">
+        <span data-ng-show="hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-down"></span></span>
+        <span data-ng-show="!hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-up"></span></span>
+      </a>
+    </div>
+  </div>
+  <h1>Token Overview: {{tokenInfo.name}}</h1>
+  <div class="text-muted" data-ng-if="!txs">
+    <span translate>Loading Token Information</span>  <span class="loader-gif"></span>
+  </div>
+  <div data-ng-if="tokenInfo.tokenid">
+    <div class="well well-sm ellipsis">
+      <strong>Description</strong> 
+      <span class="txid text-muted">{{tokenInfo.description}}</span>
+      <div style="padding-top: 10px">
+        <strong>Token ID</strong> 
+        <span class="txid text-muted">
+          <a href="tx/{{tokenInfo.tokenid}}">{{tokenInfo.tokenid}}</a>
+        </span>
+        <span class="btn-copy" clip-copy="tokenInfo.tokenid"></span>
+      </div>
+    </div>
+    <h2 style="padding-top: 20px" translate>Summary</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table">
+          <tbody>
+          <tr>
+            <td><strong translate>Supply</strong></td>
+            <td class="text-right text-muted">{{tokenInfo.supply}}</td>
+          </tr>
+          <tr>
+            <td><strong translate>Owner</strong></td>
+            <td class="text-right text-muted">
+              <a href="/address/{{tokenInfo.ownerAddress}}">{{tokenInfo.ownerAddress}}</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table" style="table-layout: fixed">
+          <tbody>
+          <tr>
+            <td><strong translate>Number Of Transactions</strong></td>
+            <td class="text-right text-muted">{{txs.length}}</td>
+          </tr>
+          <tr>
+            <td><strong translate>Height</strong></td>
+            <td class="text-right text-muted">{{tokenInfo.height}}
+            </td>
+          </tr>
+          <tr>
+            <td><strong translate>Created</strong></td>
+            <td class="text-right text-muted">{{tokenInfo.blocktime * 1000 | date:'medium'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div data-ng-if="tokenInfo.tokenid && !isRichlist" data-ng-controller="TokenTransactionsController">
+    <h3 translate>Transactions | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/richlist">Richlist</a></h3>
+    <div data-ng-include src="'views/tokens/transactions_list.html'" when-scrolled="loadMore()"></div>
+  </div>
+  <div data-ng-if="tokenInfo.tokenid && isRichlist" data-ng-controller="TokenRichlistController">
+    <h3 translate><a href="tokens/{{tokenInfo.tokenid || cctxid}}/transactions">Transactions</a> | Richlist</h3>
+    <div data-ng-include src="'views/tokens/token_richlist.html'" when-scrolled="loadMore()"></div>
+  </div>
+</section>
