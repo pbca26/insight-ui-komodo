@@ -1119,6 +1119,50 @@ function($scope, $routeParams, $route, $location, $interval, Global, Tokens, Tok
     });
 });
 
+// Source: public/src/js/controllers/tokens.js
+angular.module('insight.tokens').controller('TokenRichlistController',
+function($scope, $routeParams, $location, $interval, Global, Tokens, TokensTransactions, TokensRichlist, TokensAddressBalance, TokensAddressTransactions) {
+  var syncInterval;
+  var pageNum = -1;
+
+  $scope.global = Global;
+  $scope.loading = true;
+  $scope.cctxid = $routeParams.cctxid;
+
+  Tokens.get({},
+    function(tokensData) {
+      var tokenInfoObj = {};
+
+      for (var i = 0; i < tokensData.tokens.length; i++) {
+        if (tokensData.tokens[i].tokenid === $routeParams.cctxid) {
+          console.warn(tokensData.tokens[i]);
+          $scope.tokenInfo = tokensData.tokens[i];
+          break;
+        }
+      }
+    },
+    function(e) {
+      var err = 'Could not get tokens information' + e.toString();
+      $scope.chart = {
+        error: err
+      };
+    });
+  
+  TokensRichlist.get({cctxid: $routeParams.cctxid},
+    function(tokensRichlist) {
+      console.warn('tokensRichlist', tokensRichlist);
+
+      $scope.loading = false;
+      $scope.richlist = tokensRichlist.addresses;
+    },
+    function(e) {
+      var err = 'Could not get token richlist information' + e.toString();
+      $scope.chart = {
+        error: err
+      };
+    });
+});
+
 // Source: public/src/js/controllers/transactions.js
 angular.module('insight.transactions').controller('transactionsController',
 function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress) {

@@ -1,0 +1,25 @@
+<div data-ng-include src="'views/includes/connection.html'"></div>
+<section data-ng-controller="TokenRichlistController" data-ng-init="loadMore()">
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <table class="table table-hover table-striped" when-scrolled="loadMore()">
+        <thead>
+          <tr>
+            <th translate>Address</th>
+            <th translate>Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-show="loading">
+          <td colspan="5"><span translate>Waiting for richlist data...</span> <span class="loader-gif"></span></td>
+        </tr>
+        <tr class="fader" data-ng-repeat='item in richlist'>
+          <td><a href="tokens/{{cctxid}}/address/{{item.address}}">{{item.address}}</a></td>
+          <td>{{item.balance}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <h2 class="text-center text-muted" data-ng-show="!richlist.length && !loading" translate>No richlist data yet.</h2>
+</section>
