@@ -1163,6 +1163,72 @@ function($scope, $routeParams, $location, $interval, Global, Tokens, TokensTrans
     });
 });
 
+// Source: public/src/js/controllers/tokens.js
+angular.module('insight.tokens').controller('TokenTransactionsController',
+function($scope, $routeParams, $location, $interval, Global, Tokens, TokensTransactions, TokensRichlist, TokensAddressBalance, TokensAddressTransactions) {
+  var syncInterval;
+  var pageNum = -1;
+  var address = $routeParams.addrStr;
+  
+  $scope.global = Global;
+  $scope.loading = true;
+  $scope.cctxid = $routeParams.cctxid;
+  $scope.address = $routeParams.addrStr;
+
+  Tokens.get({},
+    function(tokensData) {
+      var tokenInfoObj = {};
+
+      for (var i = 0; i < tokensData.tokens.length; i++) {
+        if (tokensData.tokens[i].tokenid === $routeParams.cctxid) {
+          console.warn(tokensData.tokens[i]);
+          $scope.tokenInfo = tokensData.tokens[i];
+          break;
+        }
+      }
+    },
+    function(e) {
+      var err = 'Could not get tokens information' + e.toString();
+      $scope.chart = {
+        error: err
+      };
+    });
+
+  if (address) {
+    TokensAddressTransactions.get({
+      address: address,
+      cctxid: $routeParams.cctxid
+    },
+      function(tokenAddressTransactions) {
+        console.warn('tokenAddressTransactions', tokenAddressTransactions);
+  
+        $scope.loading = false;
+        $scope.txs = tokenAddressTransactions.txs;
+        console.warn($scope.txs);
+      },
+      function(e) {
+        var err = 'Could not get token address transactions information' + e.toString();
+        $scope.chart = {
+          error: err
+        };
+      });
+  } else {
+    TokensTransactions.get({cctxid: $routeParams.cctxid},
+    function(tokensTransactions) {
+      console.warn('tokensTransactions', tokensTransactions);
+
+      $scope.loading = false;
+      $scope.txs = tokensTransactions.txs;
+    },
+    function(e) {
+      var err = 'Could not get token transactions information' + e.toString();
+      $scope.chart = {
+        error: err
+      };
+    });
+  }
+});
+
 // Source: public/src/js/controllers/transactions.js
 angular.module('insight.transactions').controller('transactionsController',
 function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress) {
