@@ -23,43 +23,43 @@ app.use(bodyParser.urlencoded({
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/coin/*', (req, res) => {
+app.get('/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/messages/verify/coin/*', (req, res) => {
+app.get('/messages/verify/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tx/send/coin/*', (req, res) => {
+app.get('/tx/send/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/blocks/coin/*', (req, res) => {
+app.get('/blocks/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/charts/*/coin/*', (req, res) => {
+app.get('/charts/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/status/coin/*', (req, res) => {
+app.get('/status/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/block/*/coin/*', (req, res) => {
+app.get('/block/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/block-index/*/coin/*', (req, res) => {
+app.get('/block-index/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/blocks-date/*/coin/*', (req, res) => {
+app.get('/blocks-date/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tx/*/coin/*', (req, res) => {
+app.get('/tx/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/address/*/coin/*', (req, res) => {
+app.get('/address/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/charts/*/coin/*', (req, res) => {
+app.get('/charts/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/charts/coin/*', (req, res) => {
+app.get('/charts/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 // assets search
@@ -70,25 +70,25 @@ app.get('/search/assets/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 // tokens
-app.get('/tokens/coin/*', (req, res) => {
+app.get('/tokens/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tokens/*/orderbook/coin/*', (req, res) => {
+app.get('/tokens/*/orderbook/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tokens/*/trades/coin/*', (req, res) => {
+app.get('/tokens/*/trades/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tokens/*/richlist/coin/*', (req, res) => {
+app.get('/tokens/*/richlist/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tokens/*/transactions/coin/*', (req, res) => {
+app.get('/tokens/*/transactions/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tokens/*/address/*/coin/*', (req, res) => {
+app.get('/tokens/*/address/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tokens/address/*/coin/*', (req, res) => {
+app.get('/tokens/address/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
@@ -97,7 +97,7 @@ app.use('/views', express.static(path.join(__dirname, 'public/views')));
 
 let server;
 const config = {
-  ip: 'localhost',
+  ip: '127.0.0.1',
   https: false,
   port: 8889,
 };

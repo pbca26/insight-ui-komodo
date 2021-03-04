@@ -1970,11 +1970,11 @@ angular.module('insight').config(function($routeProvider) {
       templateUrl: 'views/search-assets.html',
       title: 'Komodo Asset Chains Search '
     }).
-    when('/block/:blockHash/coin/:coin', {
+    when('/block/:blockHash/:coin?', {
       templateUrl: 'views/block.html',
       title: 'Komodo Block '
     }).
-    when('/block-index/:blockHeight/coin/:coin', {
+    when('/block-index/:blockHeight/:coin?', {
       controller: 'BlocksController',
       templateUrl: 'views/redirect.html'
     }).
@@ -1982,7 +1982,7 @@ angular.module('insight').config(function($routeProvider) {
       templateUrl: 'views/transaction_sendraw.html',
       title: 'Broadcast Raw Transaction'
     }).
-    when('/tx/:txId/:v_type?/:v_index?/coin/:coin', {
+    when('/tx/:txId/:v_type?/:v_index?/:coin?', {
       templateUrl: 'views/transaction.html',
       title: 'Komodo Transaction '
     }).
@@ -1990,53 +1990,57 @@ angular.module('insight').config(function($routeProvider) {
       templateUrl: 'views/index.html',
       title: 'Home'
     }).
-    when('/coin/:coin', {
+    when('/:coin?', {
       templateUrl: 'views/index.html',
       title: 'Home'
     }).
-    when('/blocks/coin/:coin', {
+    when('/blocks/:coin?', {
       templateUrl: 'views/block_list.html',
       title: 'Komodo Blocks solved Today'
     }).
-    when('/blocks-date/:blockDate/:startTimestamp?/coin/:coin', {
+    when('/blocks-date/:blockDate/:startTimestamp?/:coin?', {
       templateUrl: 'views/block_list.html',
       title: 'Komodo Blocks solved '
     }).
-    when('/address/:addrStr/coin/:coin', {
+    when('/address/:addrStr/:coin?', {
       templateUrl: 'views/address.html',
       title: 'Komodo Address '
     }).
-    when('/charts/:chartType?/coin/:coin', {
+    when('/charts/:coin?', {
       templateUrl: 'views/charts.html',
       title: 'Charts'
     }).
-    when('/status/coin/:coin', {
+    when('/charts/:chartType?/:coin?', {
+      templateUrl: 'views/charts.html',
+      title: 'Charts'
+    }).
+    when('/status/:coin?', {
       templateUrl: 'views/status.html',
       title: 'Status'
     }).
-    when('/messages/verify/coin/:coin', {
+    when('/messages/verify/:coin?', {
       templateUrl: 'views/messages_verify.html',
       title: 'Verify Message'
     }).
-    when('/tokens/coin/:coin', {
+    when('/tokens/:coin?', {
       templateUrl: 'views/tokens/tokens_list.html',
       title: 'Tokens'
     }).
-    when('/tokens/:cctxid/transactions/coin/:coin', {
+    when('/tokens/:cctxid/transactions/:coin?', {
       templateUrl: 'views/tokens/token_overview.html',
       title: 'Token Transactions',
       isRichlist: false,
     }).
-    when('/tokens/:cctxid/richlist/coin/:coin', {
+    when('/tokens/:cctxid/richlist/:coin?', {
       templateUrl: 'views/tokens/token_overview.html',
       title: 'Token Richlist',
       isRichlist: true,
     }).
-    when('/tokens/:cctxid/address/:addrStr/coin/:coin', {
+    when('/tokens/:cctxid/address/:addrStr/:coin?', {
       templateUrl: 'views/tokens/token_address.html',
       title: 'Token Address Transactions',
     }).
-    when('/tokens/address/:addrStr/coin/:coin', {
+    when('/tokens/address/:addrStr/:coin?', {
       templateUrl: 'views/tokens/token_address_overview.html',
       title: 'Token Address Overview',
     }).
