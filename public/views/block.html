@@ -1,4 +1,4 @@
-<div data-ng-include src="'public/views/includes/connection.html'"></div>
+<div data-ng-include src="'views/includes/connection.html'"></div>
 <section data-ng-controller="BlocksController" data-ng-init="findOne()">  
   <div class="secondary_navbar hidden-xs hidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-show="block.hash" data-ng-init="hideSNavbar=0">
     <div class="container" data-ng-if="!hideSNavbar">
@@ -140,7 +140,7 @@
   </div>
   <div data-ng-if="block.hash" data-ng-controller="transactionsController" data-ng-init="load('block')">
     <h3 translate>Transactions</h3>
-    <div data-ng-include src="'public/views/transaction/list.html'" when-scrolled="loadMore()"></div>
+    <div data-ng-include src="'views/transaction/list.html'" when-scrolled="loadMore()"></div>
   </div>
 
 </section>

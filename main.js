@@ -70,7 +70,7 @@ app.get('/search/assets/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 // tokens
-app.get('/tokens', (req, res) => {
+app.get('/tokens/coin/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 app.get('/tokens/*/orderbook/coin/*', (req, res) => {
@@ -93,6 +93,7 @@ app.get('/tokens/address/*/coin/*', (req, res) => {
 });
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/views', express.static(path.join(__dirname, 'public/views')));
 
 let server;
 const config = {

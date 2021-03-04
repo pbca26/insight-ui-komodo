@@ -15,7 +15,7 @@
           <a href="{{item.link}}/coin/{{$root.coin}}">{{item.title|translate}}</a>
         </li>
       </ul>
-      <span class="hidden-xs navbar-form navbar-left" data-ng-include src="'public/views/includes/search.html'"></span>
+      <span class="hidden-xs navbar-form navbar-left" data-ng-include src="'views/includes/search.html'"></span>
       <ul class="nav navbar-nav navbar-right">
         <li>
         <div class="status hidden-md" data-ng-controller="StatusController">
@@ -43,7 +43,7 @@
         <li class="hidden-sm">
           <a class="pointer" data-ng-click="openScannerModal()"><span class="glyphicon glyphicon-qrcode"></span> Scan</a>
         </li>
-        <li class="dropdown dropdown-currency" data-ng-controller="CurrencyController" data-ng-include="'public/views/includes/currency.html'"></li>
+        <li class="dropdown dropdown-currency" data-ng-controller="CurrencyController" data-ng-include="'views/includes/currency.html'"></li>
       </ul>
     </div>
   </div>
