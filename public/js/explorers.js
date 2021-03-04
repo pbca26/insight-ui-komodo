@@ -51,9 +51,8 @@ var _explorers = {
     url: 'https://morty.kmd.dev',
   },
   RICK: {
-    apiPrefix: '/api',
+    apiPrefix: '/insight-api-komodo',
     url: 'https://rick.kmd.dev',
-    isTokens: true,
   },
   VOTE2019: 'https://vote2019.world',
   LABS: 'https://labs.explorer.dexstats.info',
