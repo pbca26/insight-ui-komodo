@@ -1,13 +1,13 @@
 <div class="alert alert-danger flash-message" data-ng-show="flashMessage">
   {{$root.flashMessage}}
 </div>
-<div data-ng-include src="'public/views/includes/connection.html'"></div>
+<div data-ng-include src="'views/includes/connection.html'"></div>
 <section data-ng-controller="IndexController" data-ng-init="index()">
   <div class="container">
     <div id="home" class="row">
       <div class="col-xs-12 col-md-8">
 
-        <div id="search-form-mobile" class="visible-xs" data-ng-include src="'public/views/includes/search.html'"></div>
+        <div id="search-form-mobile" class="visible-xs" data-ng-include src="'views/includes/search.html'"></div>
         <div data-ng-controller="AdRotatorController">
           <div class="adrotator-container">
             <strong>{{ads[adIndex].title}}</strong>

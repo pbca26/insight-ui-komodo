@@ -1772,7 +1772,7 @@ angular.module('insight')
       scope: {
         coin: '=',
       },
-      templateUrl: 'public/views/search-dropdown.html',
+      templateUrl: 'views/search-dropdown.html',
       replace: true,
       link: function(scope, element, attr) {
         scope.isOpened = false;
@@ -1812,7 +1812,7 @@ angular.module('insight')
       scope: {
         coin: '=',
       },
-      templateUrl: 'public/views/explorer-dropdown.html',
+      templateUrl: 'views/explorer-dropdown.html',
       replace: true,
       link: function(scope, element, attr) {
         scope.isOpened = false;
@@ -1967,55 +1967,55 @@ angular.module('insight')
 angular.module('insight').config(function($routeProvider) {
   $routeProvider.
     when('/search/assets/:address', {
-      templateUrl: 'public/views/search-assets.html',
+      templateUrl: 'views/search-assets.html',
       title: 'Komodo Asset Chains Search '
     }).
     when('/block/:blockHash/coin/:coin', {
-      templateUrl: 'public/views/block.html',
+      templateUrl: 'views/block.html',
       title: 'Komodo Block '
     }).
     when('/block-index/:blockHeight/coin/:coin', {
       controller: 'BlocksController',
-      templateUrl: 'public/views/redirect.html'
+      templateUrl: 'views/redirect.html'
     }).
     when('/tx/send/coin/:coin', {
-      templateUrl: 'public/views/transaction_sendraw.html',
+      templateUrl: 'views/transaction_sendraw.html',
       title: 'Broadcast Raw Transaction'
     }).
     when('/tx/:txId/:v_type?/:v_index?/coin/:coin', {
-      templateUrl: 'public/views/transaction.html',
+      templateUrl: 'views/transaction.html',
       title: 'Komodo Transaction '
     }).
     when('/', {
-      templateUrl: 'public/views/index.html',
+      templateUrl: 'views/index.html',
       title: 'Home'
     }).
     when('/coin/:coin', {
-      templateUrl: 'public/views/index.html',
+      templateUrl: 'views/index.html',
       title: 'Home'
     }).
     when('/blocks/coin/:coin', {
-      templateUrl: 'public/views/block_list.html',
+      templateUrl: 'views/block_list.html',
       title: 'Komodo Blocks solved Today'
     }).
     when('/blocks-date/:blockDate/:startTimestamp?/coin/:coin', {
-      templateUrl: 'public/views/block_list.html',
+      templateUrl: 'views/block_list.html',
       title: 'Komodo Blocks solved '
     }).
     when('/address/:addrStr/coin/:coin', {
-      templateUrl: 'public/views/address.html',
+      templateUrl: 'views/address.html',
       title: 'Komodo Address '
     }).
     when('/charts/:chartType?/coin/:coin', {
-      templateUrl: 'public/views/charts.html',
+      templateUrl: 'views/charts.html',
       title: 'Charts'
     }).
     when('/status/coin/:coin', {
-      templateUrl: 'public/views/status.html',
+      templateUrl: 'views/status.html',
       title: 'Status'
     }).
     when('/messages/verify/coin/:coin', {
-      templateUrl: 'public/views/messages_verify.html',
+      templateUrl: 'views/messages_verify.html',
       title: 'Verify Message'
     }).
     when('/tokens/coin/:coin', {
@@ -2041,7 +2041,7 @@ angular.module('insight').config(function($routeProvider) {
       title: 'Token Address Overview',
     }).
     otherwise({
-      templateUrl: 'public/views/404.html',
+      templateUrl: 'views/404.html',
       title: 'Error'
     });
 });
