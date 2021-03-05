@@ -4,7 +4,7 @@
     <div class="container" data-ng-if="!hideSNavbar">
       <div class="row">
         <div class="col-md-1">
-          <a href="block/{{block.previousblockhash}}/coin/{{$root.coin}}"><span class="lead glyphicon glyphicon-chevron-left"></span></a>
+          <a href="{{$root.formatUrl('block/' + block.previousblockhash)}}"><span class="lead glyphicon glyphicon-chevron-left"></span></a>
         </div>
         <div class="col-md-10">
           <div class="row">
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="col-md-1">
-          <a data-ng-show="block.nextblockhash" href="block/{{block.nextblockhash}}/coin/{{$root.coin}}"><span class="lead glyphicon glyphicon-chevron-right"></span></a>
+          <a data-ng-show="block.nextblockhash" href="{{$root.formatUrl('block/' + block.nextblockhash)}}"><span class="lead glyphicon glyphicon-chevron-right"></span></a>
         </div>
       </div>
     </div> <!-- END OF CONTAINER -->
@@ -82,7 +82,7 @@
           </tr>
           <tr data-ng-show="block.previousblockhash">
             <td><strong translate>Previous Block</strong></td>
-            <td class="text-right"><a href="block/{{block.previousblockhash}}/coin/{{$root.coin}}">{{block.height-1}}</a></td>
+            <td class="text-right"><a href="{{$root.formatUrl('block/' + block.previousblockhash)}}">{{block.height-1}}</a></td>
           </tr>
           </tbody>
         </table>
@@ -126,7 +126,7 @@
           </tr>
           <tr data-ng-show="block.nextblockhash">
             <td><strong translate>Next Block</strong></td>
-            <td class="text-right"><a href="block/{{block.nextblockhash}}/coin/{{$root.coin}}">{{block.height+1}}</a></td>
+            <td class="text-right"><a href="{{$root.formatUrl('block/' + block.nextblockhash)}}">{{block.height+1}}</a></td>
           </tr>
           <tr data-ng-show="$root.notarized">
             <td><strong translate>Notarized</strong></td>

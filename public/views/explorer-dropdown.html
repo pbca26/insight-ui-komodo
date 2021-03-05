@@ -6,7 +6,7 @@
     <input type="text" ng-keyup="keyup()" class="form-control quick-search" data-ng-model="explorerQuickFilter" placeholder="Quick search" data-ng-submit="search()" focus="true">       
     <div class="no-match" ng-show="!explorers.length">No match</div>
     <li data-ng-repeat="item in explorers" ng-show="explorers.length">
-      <a href="{{!item.hasOwnProperty('ext') ? '/coin/' + item : item.url}}" target="{{item.hasOwnProperty('ext') ? '_blank' : '_self'}}" data-hide="item === coin"><img ng-src="public/img/coins/{{!item.hasOwnProperty('ext') ? item.toLowerCase() : item.name.toLowerCase()}}.png" alt="Logo"> {{!item.hasOwnProperty('ext') ? item.toUpperCase() : item.name.toUpperCase()}}</a>
+      <a href="{{!item.hasOwnProperty('ext') ? '/' + item : item.url}}" target="{{item.hasOwnProperty('ext') ? '_blank' : '_self'}}" data-hide="item === coin"><img ng-src="public/img/coins/{{!item.hasOwnProperty('ext') ? item.toLowerCase() : item.name.toLowerCase()}}.png" alt="Logo"> {{!item.hasOwnProperty('ext') ? item.toUpperCase() : item.name.toUpperCase()}}</a>
     </li>
   </ul>
 </span>

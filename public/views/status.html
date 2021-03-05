@@ -64,11 +64,11 @@
         <tbody>
           <tr>
             <td translate>Last Block Hash (Komodod)</td>
-            <td class="text-right ellipsis"><a href="block/{{lastblockhash}}/coin/{{$root.coin}}">{{lastblockhash}}</a></td>
+            <td class="text-right ellipsis"><a href="{{$root.formatUrl('block/' + lastblockhash)}}">{{lastblockhash}}</a></td>
           </tr>
           <tr>
             <td translate>Current Blockchain Tip (insight)</td>
-            <td class="text-right ellipsis"><a href="block/{{syncTipHash}}/coin/{{$root.coin}}">{{syncTipHash}}</a></td>
+            <td class="text-right ellipsis"><a href="{{$root.formatUrl('block/' + syncTipHash)}}">{{syncTipHash}}</a></td>
           </tr>
         </tbody>
       </table>
@@ -90,7 +90,7 @@
           </tr>
           <tr>
             <td translate>Blocks</td>
-            <td class="text-right"><a href="block-index/{{info.blocks}}/coin/{{$root.coin}}">{{info.blocks}}</a></td>
+            <td class="text-right"><a href="{{$root.formatUrl('block-index/' + info.blocks)}}">{{info.blocks}}</a></td>
           </tr>
           <tr>
             <td translate>Time Offset</td>

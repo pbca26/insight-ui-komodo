@@ -41,19 +41,19 @@ app.get('/charts/*/:coin?', (req, res) => {
 app.get('/status/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/block/:coin?', (req, res) => {
+app.get('/block/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/block-index/:coin?', (req, res) => {
+app.get('/block-index/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/blocks-date/:coin?', (req, res) => {
+app.get('/blocks-date/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 app.get('/tx/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/address/:coin?', (req, res) => {
+app.get('/address/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 app.get('/charts/*/:coin?', (req, res) => {
