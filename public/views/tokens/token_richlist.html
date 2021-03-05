@@ -14,7 +14,7 @@
           <td colspan="5"><span translate>Waiting for richlist data...</span> <span class="loader-gif"></span></td>
         </tr>
         <tr class="fader" data-ng-repeat='item in richlist'>
-          <td><a href="tokens/{{cctxid}}/address/{{item.address}}">{{item.address}}</a></td>
+          <td><a href="{{$root.formatUrl('tokens/' + cctxid + '/address/' + item.address)}}">{{item.address}}</a></td>
           <td>{{item.balance}}</td>
         </tr>
         </tbody>

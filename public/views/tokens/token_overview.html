@@ -4,7 +4,7 @@
     <div class="container" data-ng-if="!hideSNavbar">
       <div class="row">
         <div class="col-md-1">
-          <a href="block/{{block.previousblockhash}}"><span class="lead glyphicon glyphicon-chevron-left"></span></a>
+          <a href="{{$root.formatUrl('block/' + block.previousblockhash)}}"><span class="lead glyphicon glyphicon-chevron-left"></span></a>
         </div>
         <div class="col-md-10">
           <div class="row">
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="col-md-1">
-          <a data-ng-show="block.nextblockhash" href="block/{{block.nextblockhash}}"><span class="lead glyphicon glyphicon-chevron-right"></span></a>
+          <a data-ng-show="block.nextblockhash" href="{{$root.formatUrl('block/' + block.nextblockhash)}}"><span class="lead glyphicon glyphicon-chevron-right"></span></a>
         </div>
       </div>
     </div> <!-- END OF CONTAINER -->
@@ -42,7 +42,7 @@
       <div style="padding-top: 10px">
         <strong>Token ID</strong> 
         <span class="txid text-muted">
-          <a href="tx/{{tokenInfo.tokenid}}">{{tokenInfo.tokenid}}</a>
+          <a href="{{$root.formatUrl('tx/' + tokenInfo.tokenid)}}">{{tokenInfo.tokenid}}</a>
         </span>
         <span class="btn-copy" clip-copy="tokenInfo.tokenid"></span>
       </div>
@@ -59,7 +59,7 @@
           <tr>
             <td><strong translate>Owner</strong></td>
             <td class="text-right text-muted">
-              <a href="/address/{{tokenInfo.ownerAddress}}">{{tokenInfo.ownerAddress}}</a>
+              <a href="{{$root.formatUrl('/address/' + tokenInfo.ownerAddress)}}">{{tokenInfo.ownerAddress}}</a>
             </td>
           </tr>
           </tbody>
@@ -87,11 +87,11 @@
     </div>
   </div>
   <div data-ng-if="tokenInfo.tokenid && !isRichlist" data-ng-controller="TokenTransactionsController">
-    <h3 translate>Transactions | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/richlist">Richlist</a></h3>
+    <h3 translate>Transactions | <a href="{{$root.formatUrl('tokens/' + (tokenInfo.tokenid || cctxid) + '/richlist')}}">Richlist</a></h3>
     <div data-ng-include src="'views/tokens/transactions_list.html'" when-scrolled="loadMore()"></div>
   </div>
   <div data-ng-if="tokenInfo.tokenid && isRichlist" data-ng-controller="TokenRichlistController">
-    <h3 translate><a href="tokens/{{tokenInfo.tokenid || cctxid}}/transactions">Transactions</a> | Richlist</h3>
+    <h3 translate><a href="{{$root.formatUrl('tokens/' + (tokenInfo.tokenid || cctxid) + '/transactions')}}">Transactions</a> | Richlist</h3>
     <div data-ng-include src="'views/tokens/token_richlist.html'" when-scrolled="loadMore()"></div>
   </div>
 </section>

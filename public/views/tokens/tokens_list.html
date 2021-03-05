@@ -21,7 +21,7 @@
         </tr>
         <tr class="fader" data-ng-repeat='t in tokens'>
           <td>
-            <a href="tokens/{{t.tokenid}}/transactions">{{t.name}}</a><br/>
+            <a href="{{$root.formatUrl('tokens/' + t.tokenid + '/transactions')}}">{{t.name}}</a><br/>
             <small>{{t.description}}</small>
           </td>
           <td>{{t.supply}}</td>

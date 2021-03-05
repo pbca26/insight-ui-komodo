@@ -98,7 +98,7 @@ angular.module('insight.address').controller('AddressController',
           } else {
             $rootScope.flashMessage = 'Address Not Found';
           }
-          $location.path('/coin/' + $rootScope.coin);
+          $location.path($rootScope.formatUrl('/'));
         });
     };
 
@@ -114,10 +114,10 @@ angular.module('insight.blocks').controller('BlocksController',
     BlockByHeight.get({
       blockHeight: $routeParams.blockHeight
     }, function(hash) {
-      $location.path('/block/' + hash.blockHash + '/coin/' + $rootScope.coin);
+      $location.path($rootScope.formatUrl('/block/' + hash.blockHash));
     }, function() {
       $rootScope.flashMessage = 'Bad Request';
-      $location.path('/coin/' + $rootScope.coin);
+      $location.path($rootScope.formatUrl('/'));
     });
   }
 
@@ -132,7 +132,7 @@ angular.module('insight.blocks').controller('BlocksController',
 
   $scope.$watch('dt', function(newValue, oldValue) {
     if (newValue !== oldValue) {
-      $location.path('/blocks-date/' + _formatTimestamp(newValue) + '/coin/' + $rootScope.coin);
+      $location.path($rootScope.formatUrl('/blocks-date/' + _formatTimestamp(newValue)));
     }
   });
 
@@ -156,7 +156,7 @@ angular.module('insight.blocks').controller('BlocksController',
       $scope.detail = 'On ' + $routeParams.blockDate;
     }
 
-    if ($routeParams.startTimestamp) {
+    if ($routeParams.startTimestamp && /^\d+$/.test($routeParams.startTimestamp)) {
       var d=new Date($routeParams.startTimestamp*1000);
       var m=d.getMinutes();
       if (m<10) m = '0' + m;
@@ -195,7 +195,7 @@ angular.module('insight.blocks').controller('BlocksController',
       else {
         $rootScope.flashMessage = 'Block Not Found';
       }
-      $location.path('/coin/' + $rootScope.coin);
+      $location.path($rootScope.formatUrl('/'));
     });
   };
 
@@ -339,7 +339,7 @@ angular.module('insight.charts').controller('ChartsController',
       else {
         $rootScope.flashMessage = 'Chart Not Found';
       }
-      $location.path('/coin/' + $rootScope.coin);
+      $location.path($rootScope.formatUrl('/'));
     });
   };
 
@@ -441,6 +441,14 @@ angular.module('insight.currency').controller('CurrencyController',
 
       return 'value error';
     };
+
+    $rootScope.formatUrl = function(url) {
+      if (_explorers && Object.keys(_explorers).length > 1) {
+        return url !== '' && url !== '/' ? url + '/' + $rootScope.coin : $rootScope.coin;
+      } else {
+        return url;
+      }
+    }
 
     $scope.setCurrency = function(currency) {
       $rootScope.currency.symbol = currency;
@@ -903,26 +911,26 @@ angular.module('insight.search').controller('SearchController',
         blockHash: q
       }, function() {
         _resetSearch();
-        $location.path('block/' + q + '/coin/' + $rootScope.coin);
+        $location.path($rootScope.formatUrl('block/' + q));
       }, function() { //block not found, search on TX
         Transaction.get({
           txId: q
         }, function() {
           _resetSearch();
-          $location.path('tx/' + q + '/coin/' + $rootScope.coin);
+          $location.path($rootScope.formatUrl('tx/' + q));
         }, function() { //tx not found, search on Address
           Address.get({
             addrStr: q
           }, function() {
             _resetSearch();
-            $location.path('address/' + q + '/coin/' + $rootScope.coin);
+            $location.path($rootScope.formatUrl('address/' + q));
           }, function() { // block by height not found
             if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
               BlockByHeight.get({
                 blockHeight: q
               }, function(hash) {
                 _resetSearch();
-                $location.path('/block/' + hash.blockHash + '/coin/' + $rootScope.coin);
+                $location.path($rootScope.formatUrl('/block/' + hash.blockHash));
               }, function() { //not found, fail :(
                 $scope.loading = false;
                 _badQuery();
@@ -1412,7 +1420,7 @@ function($scope, $rootScope, $routeParams, $location, Global, Transaction, Trans
         $rootScope.flashMessage = 'Transaction Not Found';
       }
 
-      $location.path('/coin/' + $rootScope.coin);
+      $location.path($rootScope.formatUrl('/'));
     });
   };
 

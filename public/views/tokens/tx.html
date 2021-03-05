@@ -4,7 +4,7 @@
       <a class="btn-expand" title="Show/Hide items details" data-ng-click="itemsExpanded = !itemsExpanded">
         <span class="glyphicon glyphicon-plus-sign" data-ng-class="{'glyphicon-minus-sign': itemsExpanded}"></span>
       </a>
-      <a href="tx/{{tx.txid}}">{{tx.txid}}</a>
+      <a href="{{$root.formatUrl('tx/' + tx.txid)}}">{{tx.txid}}</a>
       <span class="btn-copy" clip-copy="tx.txid"></span>
     </div>
   </div>
@@ -34,7 +34,7 @@
               {{tx.value}} {{tokenInfo.name}}
             </div>
             <div class="ellipsis">
-              <a ng-if="address !== tx.from" href="/tokens/{{cctxid}}/address/{{tx.from}}">{{tx.from}}</a>
+              <a ng-if="address !== tx.from" href="{{$root.formatUrl('/tokens/' + cctxid + '/address/' + tx.from)}}">{{tx.from}}</a>
               <span ng-if="address === tx.from" class="text-muted" title="Current Token Address">{{address}}</span>
             </div>
           </div>
@@ -62,7 +62,7 @@
                 {{tx.value}} {{tokenInfo.name}}
               </div>
               <div class="ellipsis">
-                <a ng-if="address !== tx.to" href="/tokens/{{cctxid}}/address/{{tx.to}}">{{tx.to}}</a>
+                <a ng-if="address !== tx.to" href="{{$root.formatUrl('/tokens/' + cctxid + '/address/' + tx.to)}}">{{tx.to}}</a>
                 <span ng-if="address === tx.to" class="text-muted" title="Current Token Address">{{address}}</span>
               </div>
             </div>

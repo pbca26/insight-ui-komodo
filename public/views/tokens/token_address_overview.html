@@ -25,7 +25,7 @@
         </tr>
         <tr class="fader" data-ng-repeat='t in holdings'>
           <td>
-            <a href="tokens/{{t.tokenId}}/address/{{address}}">{{tokenInfo[t.tokenId].name}}</a><br/>
+            <a href="{{$root.formatUrl('tokens/' + t.tokenId + '/address/' + address)}}">{{tokenInfo[t.tokenId].name}}</a><br/>
           </td>
           <td>{{t.balance}}</td>
         </tr>

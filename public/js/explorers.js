@@ -54,6 +54,12 @@ var _explorers = {
     apiPrefix: '/insight-api-komodo',
     url: 'https://rick.kmd.dev',
   },
+  WSB: {
+    url: 'https://explorer.komodoplatform.com:10000',
+    apiPrefix: '/wsb/api/',
+    socketPrefix: 'wsb',
+    isTokens: true,
+  },
   VOTE2019: 'https://vote2019.world',
   LABS: 'https://labs.explorer.dexstats.info',
   HUSH: 'https://explorer.myhush.org',
