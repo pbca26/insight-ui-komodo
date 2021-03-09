@@ -62,7 +62,7 @@
       </table>
       <div data-ng-if="pagination.more">
         <!-- FIXME, pagination is visible even if no older dates are available -->
-        <a class="btn btn-primary" href="{{$root.formatUrl('blocks-date/' + pagination.current)}}" data-ng-show="{{before}}">Lastest block from date</a>
+        <a class="btn btn-primary" href="{{$root.formatUrl('blocks-date/' + pagination.current)}}" data-ng-show="before">Lastest block from date</a>
         <a class="btn btn-primary" href="{{$root.formatUrl('blocks-date/' + pagination.current + '/' + pagination.moreTs)}}">Older blocks from this date</a>
       </div>
     </div>
