@@ -32,7 +32,8 @@
 
 .light .navbar-default a:hover,
 .light .navbar-default a:active,
-.light .navbar-default a:focus {
+.light .navbar-default a.active,
+.light .navbar-default li.active a {
   color: #182331 !important;
   background: linear-gradient(to top, #182331 0, #182331 0.25em, transparent 0.25em, transparent 100%) !important;
 }

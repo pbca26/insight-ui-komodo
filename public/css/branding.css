@@ -24,7 +24,7 @@
 
 .dark .navbar-default a:hover,
 .dark .navbar-default a:active,
-.dark .navbar-default a:focus,
+.dark .navbar-default li.active a,
 .dark .explorers--dropdown.open .dropdown-toggle-trigger {
   color: #41EAD4 !important;
   background: linear-gradient(to top, #41EAD4 0, #41EAD4 0.25em, transparent 0.25em, transparent 100%) !important;
