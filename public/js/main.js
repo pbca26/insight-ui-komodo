@@ -880,6 +880,7 @@ angular.module('insight.search').controller('SearchController',
   function($scope, $routeParams, $rootScope, $location, $timeout, Global, Block, Transaction, Address, BlockByHeight) {
   $scope.global = Global;
   $scope.loading = false;
+  // TODO: search token txid
 
   var _badQuery = function() {
     $scope.badQuery = true;
@@ -919,29 +920,39 @@ angular.module('insight.search').controller('SearchController',
         }, function() {
           _resetSearch();
           $location.path($rootScope.formatUrl('tx/' + q));
-        }, function() { //tx not found, search on Address
-          Address.get({
-            addrStr: q
-          }, function() {
-            _resetSearch();
-            $location.path($rootScope.formatUrl('address/' + q));
-          }, function() { // block by height not found
-            if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
-              BlockByHeight.get({
-                blockHeight: q
-              }, function(hash) {
-                _resetSearch();
-                $location.path($rootScope.formatUrl('/block/' + hash.blockHash));
-              }, function() { //not found, fail :(
+        }, function() { //tx not found, search on Token Address or Address
+          if ($location.url().indexOf('/tokens/') > -1) {
+            TokensAddressBalance.get({
+              address: q
+            }, function() {
+              _resetSearch();
+              $location.path($rootScope.formatUrl('tokens/address/' + q));
+            }, function () {
+            });
+          } else {
+            Address.get({
+              addrStr: q
+            }, function() {
+              _resetSearch();
+              $location.path($rootScope.formatUrl('address/' + q));
+            }, function() { // block by height not found
+              if (isFinite(q)) { // ensure that q is a finite number. A logical height value.
+                BlockByHeight.get({
+                  blockHeight: q
+                }, function(hash) {
+                  _resetSearch();
+                  $location.path($rootScope.formatUrl('/block/' + hash.blockHash));
+                }, function() { //not found, fail :(
+                  $scope.loading = false;
+                  _badQuery();
+                });
+              }
+              else {
                 $scope.loading = false;
                 _badQuery();
-              });
-            }
-            else {
-              $scope.loading = false;
-              _badQuery();
-            }
-          });
+              }
+            });
+          }
         });
       });
     }
