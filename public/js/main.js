@@ -553,6 +553,7 @@ angular.module('insight.system').controller('HeaderController',
   function($scope, $rootScope, $modal, getSocket, Global, Block, $location, $route) {
     var isTokensEnabledChain = _explorers[$rootScope.coin] && _explorers[$rootScope.coin].isTokens;
     $scope.global = Global;
+    $scope.location = $location;
 
     $rootScope.currency = {
       factor: 1,
