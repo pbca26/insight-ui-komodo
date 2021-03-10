@@ -877,7 +877,7 @@ angular.module('insight.system').controller('ScannerController',
 
 // Source: public/src/js/controllers/search.js
 angular.module('insight.search').controller('SearchController',
-  function($scope, $routeParams, $rootScope, $location, $timeout, Global, Block, Transaction, Address, BlockByHeight) {
+  function($scope, $routeParams, $rootScope, $location, $timeout, Global, Block, Transaction, Address, BlockByHeight, TokensAddressBalance) {
   $scope.global = Global;
   $scope.loading = false;
   // TODO: search token txid
