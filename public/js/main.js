@@ -928,6 +928,8 @@ angular.module('insight.search').controller('SearchController',
               _resetSearch();
               $location.path($rootScope.formatUrl('tokens/address/' + q));
             }, function () {
+              $scope.loading = false;
+              _badQuery();
             });
           } else {
             Address.get({
