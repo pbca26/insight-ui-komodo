@@ -2060,15 +2060,33 @@ angular.module('insight').config(function($routeProvider) {
       templateUrl: 'views/tokens/tokens_list.html',
       title: 'Tokens'
     }).
+    when('/tokens/:cctxid/trades/:coin?', {
+      templateUrl: 'views/tokens/token_overview.html',
+      title: 'Tokens Trades',
+      isRichlist: false,
+      isTokenOrders: false,
+      isTokenTrades: true,
+    }).
+    when('/tokens/:cctxid/orderbook/:coin?', {
+      templateUrl: 'views/tokens/token_overview.html',
+      title: 'Tokens Orderbook',
+      isRichlist: false,
+      isTokenOrders: true,
+      isTokenTrades: false,
+    }).
     when('/tokens/:cctxid/transactions/:coin?', {
       templateUrl: 'views/tokens/token_overview.html',
       title: 'Token Transactions',
       isRichlist: false,
+      isTokenOrders: false,
+      isTokenTrades: false,
     }).
     when('/tokens/:cctxid/richlist/:coin?', {
       templateUrl: 'views/tokens/token_overview.html',
       title: 'Token Richlist',
       isRichlist: true,
+      isTokenOrders: false,
+      isTokenTrades: false,
     }).
     when('/tokens/:cctxid/address/:addrStr/:coin?', {
       templateUrl: 'views/tokens/token_address.html',
