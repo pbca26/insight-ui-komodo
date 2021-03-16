@@ -1751,6 +1751,18 @@ angular.module('insight.tokens')
     function($resource) {
       return $resource(window.apiPrefix + '/tokens');
     })
+    .factory('TokensOrderbook',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens/orderbook', {
+        cctxid: '@cctxid'
+      });
+    })
+    .factory('TokensTrades',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens/trades', {
+        cctxid: '@cctxid'
+      });
+    })
     .factory('TokensRichlist',
     function($resource) {
       return $resource(window.apiPrefix + '/tokens/richlist', {
