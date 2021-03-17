@@ -1104,6 +1104,8 @@ function($scope, $routeParams, $route, $location, $interval, Global, Tokens, Tok
   $scope.global = Global;
   $scope.loading = true;
   $scope.isRichlist = $route.current.$$route.isRichlist;
+  $scope.isTokenOrders = $route.current.$$route.isTokenOrders;
+  $scope.isTokenTrades = $route.current.$$route.isTokenTrades;
   //$scope.tokenid = $routeParams.cctxid
 
   Tokens.get({},

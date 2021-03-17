@@ -87,12 +87,20 @@
       </div>
     </div>
   </div>
-  <div data-ng-if="tokenInfo.tokenid && !isRichlist" data-ng-controller="TokenTransactionsController">
-    <h3 translate>Transactions | <a href="{{$root.formatUrl('tokens/' + (tokenInfo.tokenid || cctxid) + '/richlist')}}">Richlist</a></h3>
+  <div data-ng-if="tokenInfo.tokenid && !isRichlist && !isTokenOrders && !isTokenTrades" data-ng-controller="TokenTransactionsController">
+    <h3 translate>Transactions | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/richlist">Richlist</a> | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/orderbook">Orderbook</a> | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/trades">Trades</a></h3>
     <div data-ng-include src="'views/tokens/transactions_list.html'" when-scrolled="loadMore()"></div>
   </div>
   <div data-ng-if="tokenInfo.tokenid && isRichlist" data-ng-controller="TokenRichlistController">
-    <h3 translate><a href="{{$root.formatUrl('tokens/' + (tokenInfo.tokenid || cctxid) + '/transactions')}}">Transactions</a> | Richlist</h3>
+    <h3 translate><a href="tokens/{{tokenInfo.tokenid || cctxid}}/transactions">Transactions</a> | Richlist | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/orderbook">Orderbook</a> | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/trades">Trades</a></h3>
     <div data-ng-include src="'views/tokens/token_richlist.html'" when-scrolled="loadMore()"></div>
+  </div>
+  <div data-ng-if="tokenInfo.tokenid && isTokenOrders" data-ng-controller="TokensOrderbookController">
+    <h3 translate><a href="tokens/{{tokenInfo.tokenid || cctxid}}/transactions">Transactions</a> | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/richlist">Richlist</a> | Orderbook | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/trades">Trades</a></h3>
+    <div data-ng-include src="'views/tokens/tokens_orderbook.html'" when-scrolled="loadMore()"></div>
+  </div>
+  <div data-ng-if="tokenInfo.tokenid && isTokenTrades" data-ng-controller="TokenTradesController">
+    <h3 translate><a href="tokens/{{tokenInfo.tokenid || cctxid}}/transactions">Transactions</a> | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/richlist">Richlist</a> | <a href="tokens/{{tokenInfo.tokenid || cctxid}}/orderbook">Orderbook</a> | Trades</a></h3>
+    <div data-ng-include src="'views/tokens/trades_list.html'" when-scrolled="loadMore()"></div>
   </div>
 </section>
