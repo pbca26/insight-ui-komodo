@@ -1306,6 +1306,47 @@ function($scope, $routeParams, $route, $location, $interval, Global, Tokens, Tok
     });
 });
 
+// Source: public/src/js/controllers/tokenOrderbook.js
+angular.module('insight.tokens').controller('TokensOrderbookController',
+function($scope, $routeParams, $location, $interval, Global, Tokens, TokensOrderbook) {
+  var syncInterval;
+  var pageNum = -1;
+  var address = $routeParams.addrStr;
+  
+  $scope.address = address;
+  $scope.global = Global;
+  $scope.loading = true;
+  $scope.mainChainTicker = window.netSymbol;
+
+  Tokens.get({},
+    function(tokensData) {
+      for (var i = 0; i < tokensData.tokens.length; i++) {
+        if (tokensData.tokens[i].tokenid === $routeParams.cctxid) {
+          console.warn(tokensData.tokens[i]);
+          $scope.tokenInfo = tokensData.tokens[i];
+          break;
+        }
+      }
+    },
+    function(e) {
+      var err = 'Could not get tokens information' + e.toString();
+      $scope.chart = {
+        error: err
+      };
+    });
+
+  TokensOrderbook.get({cctxid: $routeParams.cctxid},
+    function(tokenOrderbook) {
+      console.warn('tokenOrderbook', tokenOrderbook);
+
+      $scope.orderbook = tokenOrderbook.orderbook;
+      $scope.loading = false;
+    },
+    function(e) {
+      var err = 'Could not get token orderbook information' + e.toString();
+    });
+});
+
 // Source: public/src/js/controllers/transactions.js
 angular.module('insight.transactions').controller('transactionsController',
 function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress) {
