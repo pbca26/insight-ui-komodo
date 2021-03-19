@@ -1,0 +1,95 @@
+<div class="line-bot row" data-ng-hide="!tx">
+  <div class="col-xs-7 col-md-8">
+    <div class="ellipsis">
+      <a class="btn-expand" title="Show/Hide items details" data-ng-click="itemsExpanded = !itemsExpanded">
+        <span class="glyphicon glyphicon-plus-sign" data-ng-class="{'glyphicon-minus-sign': itemsExpanded}"></span>
+      </a>
+      <a href="tx/{{tx.txid}}">{{tx.txid}}</a>
+      <span class="btn-copy" clip-copy="tx.txid"></span>
+    </div>
+  </div>
+  <div class="col-xs-5 col-md-4 text-right text-muted">
+    <div data-ng-show="tx.time">
+      <span translate>mined</span>
+      <time>{{tx.time * 1000 | date:'medium'}}</time>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div style="height: 100px">&nbsp;</div>
+  </div>
+  <div class="col-md-6">
+    <div style="height: 100px">&nbsp;</div>
+  </div>
+</div>
+<div class="row line-mid">
+  <div class="col-md-5">
+    <div class="row">
+      <!-- <<< Simple view -->
+      <div>
+        <div class="panel panel-default">
+          <div class="panel-body transaction-vin-vout">
+            <div class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == tx.from}">
+              {{tx.value}} {{tokenInfo.name}}
+            </div>
+            <div class="ellipsis">
+              <a ng-if="address !== tx.from" href="/tokens/{{cctxid}}/address/{{tx.from}}">{{tx.from}}</a>
+              <span ng-if="address === tx.from" class="text-muted" title="Current Token Address">{{address}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <div class="hidden-xs hidden-sm text-center">
+      <span class="lead glyphicon glyphicon-chevron-right text-muted"></span>
+    </div>
+    <div class="hidden-md hidden-lg text-center">
+      <span class="lead glyphicon glyphicon-chevron-down text-muted"></span>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <!-- Simple view >>> -->
+      <div>
+        <div>
+          <div class="transaction-vin-vout panel panel-default">
+            <div class="panel-body">
+              <div class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == tx.to}">
+                {{tx.value}} {{tokenInfo.name}}
+              </div>
+              <div class="ellipsis">
+                <a ng-if="address !== tx.to" href="/tokens/{{cctxid}}/address/{{tx.to}}">{{tx.to}}</a>
+                <span ng-if="address === tx.to" class="text-muted" title="Current Token Address">{{address}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--div class="well well-sm bgwhite ellipsis" data-ng-if="itemsExpanded && !block.hash && tx.blockhash">
+  <strong translate>Included in Block</strong> <a class="text-muted" href="block/{{tx.blockhash}}">{{tx.blockhash}}</a>
+  <span class="btn-copy" clip-copy="tx.blockhash"></span>
+</div-->
+
+<div class="line-top row" data-ng-hide="!tx">
+  <div class="col-xs-6 col-sm-2 col-md-2">
+    <span data-ng-show="!tx.isCoinBase && !isNaN(parseFloat(tx.fees))"
+      class="txvalues txvalues-default"><span translate>Fee</span>: {{$root.currency.getConvertion(0.00001)}} </span>
+  </div>
+  <div class="col-xs-6 col-sm-2 col-md-2">
+    <span data-ng-show="!tx.isCoinBase && !isNaN(parseFloat(tx.fees))"
+      class="txvalues txvalues-default token-orders-price"><span translate>Price</span>: {{$root.currency.getConvertion(tx.price)}} </span>
+  </div>
+<div class="col-xs-6 col-sm-8 col-md-8 text-right">
+    <!--span data-ng-show="tx.confirmations" class="txvalues
+      txvalues-success">{{tx.confirmations}} <span translate>Confirmations</span></span>
+    <span data-ng-show="!tx.confirmations" class="txvalues txvalues-danger" translate>Unconfirmed Transaction!</span-->
+    <span class="txvalues txvalues-primary">{{tx.value}} {{tokenInfo.name}}</span>
+  </div>
+</div>
