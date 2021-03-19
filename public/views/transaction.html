@@ -3,11 +3,11 @@
   <div class="secondary_navbar hidden-xs hidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-show="tx.txid" data-ng-init="hideSNavbar=0">
     <div class="container" data-ng-if="!hideSNavbar">
       <div class="col-md-6 col-lg-7 text-left">
-          <h3 translate>Transaction</h3>
-          <div class="ellipsis"> 
-            <small>{{tx.txid}}</small> 
-            <span class="btn-copy" clip-copy="tx.txid"></span>
-          </div>
+        <h3 translate>Transaction</h3>
+        <div class="ellipsis"> 
+          <small>{{tx.txid}}</small> 
+          <span class="btn-copy" clip-copy="tx.txid"></span>
+        </div>
       </div>
       <div class="col-md-6 col-lg-5 text-right">
         <span data-ng-show="tx.confirmations" class="txvalues
@@ -27,7 +27,8 @@
     </div>
   </div>
   <div data-ng-if="tx.txid">
-    <h1><span translate>Transaction</span> 
+    <h1>
+      <span translate>Transaction</span> 
       <small data-ng-show="from_vin || from_vout">
         <span data-ng-show="from_vin" translate>Input</span> 
         <span data-ng-show="from_vout" translate>Output</span> 
@@ -82,8 +83,8 @@
           <td><strong>Coinbase</strong></td>
           <td class="text-muted text-right">
             <div class="ellipsis">
-                <span class="btn-copy ng-isolate-scope" clip-copy="tx.vin[0].coinbase"></span>
-                <span class="ng-binding">{{tx.vin[0].coinbase}}</span>
+              <span class="btn-copy ng-isolate-scope" clip-copy="tx.vin[0].coinbase"></span>
+              <span class="ng-binding">{{tx.vin[0].coinbase}}</span>
             </div>
           </td>
         </tr>

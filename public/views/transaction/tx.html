@@ -21,11 +21,11 @@
 </div>
 <div class="row line-mid">
   <div class="col-md-12">
-      <div class="row" data-ng-show="tx.blockheight <= $root.notarized">
-        <div class="col-md-12 text-right">
-          <span class="text-success" translate>Notarized</span>
-        </div>
+    <div class="row" data-ng-show="tx.blockheight <= $root.notarized">
+      <div class="col-md-12 text-right">
+        <span class="text-success" translate>Notarized</span>
       </div>
+    </div>
     <div class="row" data-ng-if="!tx.bindingSig && (!tx.vjoinsplit || tx.vjoinsplit.length==0)">
       <div class="col-md-12 transaction-vin-vout">
         <div class="ellipsis">
@@ -87,8 +87,8 @@
         </div>
       </div>
     </div>
+    
     <div class="row" data-ng-if="tx.vjoinsplit && tx.vjoinsplit.length != 0">
-
       <!-- <<< Simple view -->
       <div data-ng-if="!itemsExpanded" data-ng-init="currentJSNoExpanded=0; sizeJSNoExpanded=5">
         <div class="panel panel-default" data-ng-repeat="vjs in tx.vjoinsplit| startFrom:currentJSNoExpanded*sizeJSNoExpanded | limitTo:sizeJSNoExpanded">
