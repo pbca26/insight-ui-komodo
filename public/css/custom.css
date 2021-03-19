@@ -1,0 +1,25 @@
+/* TODO: merge into overrides.css */
+.navbar-form .form-control {
+  max-width: 250px !important;
+}
+
+.navbar .container {
+  width: 100%;
+}
+
+.token-orders-price {
+  margin-left: 20px;
+}
+
+.token-address-inventory tr td {
+  vertical-align: middle !important;
+}
+
+@media (max-width: 1250px) {
+  .status {
+    display: none !important;
+  }
+  .nav.navbar-nav.navbar-right {
+    float: none !important;
+  }
+}
