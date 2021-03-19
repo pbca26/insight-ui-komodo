@@ -36,17 +36,39 @@
     <span translate>Loading Token Information</span>  <span class="loader-gif"></span>
   </div>
   <div data-ng-if="tokenInfo.tokenid">
-    <div class="well well-sm ellipsis">
-      <strong>Description</strong> 
-      <span class="txid text-muted">{{tokenInfo.description}}</span>
-      <div style="padding-top: 10px">
-        <strong>Token ID</strong> 
-        <span class="txid text-muted">
-          <a href="{{$root.formatUrl('tx/' + tokenInfo.tokenid)}}">{{tokenInfo.tokenid}}</a>
-        </span>
-        <span class="btn-copy" clip-copy="tokenInfo.tokenid"></span>
+    <div ng-if="tokenInfo.data">
+      <div class="well well-sm ellipsis">
+        <div class="row">
+          <div class="col-md-10">
+            <strong>Description</strong> 
+            <span class="txid text-muted">{{tokenInfo.description}}</span>
+            <div style="padding-top: 10px">
+              <strong>Token ID</strong> 
+              <span class="txid text-muted">
+                <a href="tx/{{tokenInfo.tokenid}}">{{tokenInfo.tokenid}}</a>
+              </span>
+              <span class="btn-copy" clip-copy="tokenInfo.tokenid"></span>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <img ng-if="tokenInfo.data && tokenInfo.data.decoded && tokenInfo.data.decoded.image" ng-src="{{tokenInfo.data.decoded.image}}" width="100" height="100" />      
+          </div>
+        </div>
       </div>
-      <img ng-if="tokenInfo.data && tokenInfo.data.decoded && tokenInfo.data.decoded.image" ng-src="{{tokenInfo.data.decoded.image}}" width="100" height="100" style="float:right" />
+    </div>
+    <div ng-if="!tokenInfo.data">
+      <div class="well well-sm ellipsis">
+        <strong>Description</strong> 
+        <span class="txid text-muted">{{tokenInfo.description}}</span>
+        <div style="padding-top: 10px">
+          <strong>Token ID</strong> 
+          <span class="txid text-muted">
+            <a href="tx/{{tokenInfo.tokenid}}">{{tokenInfo.tokenid}}</a>
+          </span>
+          <span class="btn-copy" clip-copy="tokenInfo.tokenid"></span>
+        </div>
+        <img ng-if="tokenInfo.data && tokenInfo.data.decoded && tokenInfo.data.decoded.image" ng-src="{{tokenInfo.data.decoded.image}}" width="100" height="100" style="float:right" />
+      </div>
     </div>
     <h2 style="padding-top: 20px" translate>Summary</h2>
     <div class="row">
@@ -60,7 +82,7 @@
           <tr>
             <td><strong translate>Owner</strong></td>
             <td class="text-right text-muted">
-              <a href="{{$root.formatUrl('/address/' + tokenInfo.ownerAddress)}}">{{tokenInfo.ownerAddress}}</a>
+              <a href="/address/{{tokenInfo.ownerAddress}}">{{tokenInfo.ownerAddress}}</a>
             </td>
           </tr>
           </tbody>
@@ -81,6 +103,26 @@
           <tr>
             <td><strong translate>Created</strong></td>
             <td class="text-right text-muted">{{tokenInfo.blocktime * 1000 | date:'medium'}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row" ng-if="tokenInfo.data && tokenInfo.data.decoded">
+      <div class="col-md-12">
+        <table class="table" style="table-layout: fixed">
+          <tbody>
+          <tr>
+            <td><strong translate>Image URL</strong></td>
+            <td class="text-right text-muted">{{tokenInfo.data.decoded.image}}</td>
+          </tr>
+          <tr>
+            <td><strong translate>Is physical copy included</strong></td>
+            <td class="text-right text-muted">{{tokenInfo.data.decoded.physical}}</td>
+          </tr>
+          <tr ng-if="tokenInfo.data.decoded.info">
+            <td><strong translate>Additional info</strong></td>
+            <td class="text-right text-muted">{{tokenInfo.data.decoded.info}}</td>
           </tr>
           </tbody>
         </table>
