@@ -10,7 +10,6 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th translate>Token</th>
             <th translate>Direction</th>
             <th translate>Amount</th>
             <th translate>Price</th>
@@ -21,9 +20,6 @@
           <td colspan="5"><span translate>Waiting for token orders data...</span> <span class="loader-gif"></span></td>
         </tr>
         <tr class="fader" data-ng-repeat='o in orderbook'>
-          <td>
-            {{tokenInfo[o.tokenid].name}}
-          </td>
           <td>{{o.funcid === 's' ? 'Sell' : 'Buy'}}</td>
           <td>{{o.amount}}</td>
           <td>{{o.price}} {{mainChainTicker}}</td>
