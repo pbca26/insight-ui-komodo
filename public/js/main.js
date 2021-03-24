@@ -1294,8 +1294,8 @@ function($scope, $routeParams, $route, $location, $interval, Global, Tokens, Tok
       $scope.address = {
         addrStr: address,
         balance: tokensAddressBalance.balance,
-        totalSent: 0,
-        totalReceived: 0,
+        totalSent: tokensAddressBalance.totalSent,
+        totalReceived: tokensAddressBalance.totalReceived,
       };
     },
     function(e) {
