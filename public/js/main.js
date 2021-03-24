@@ -1296,6 +1296,7 @@ function($scope, $routeParams, $route, $location, $interval, Global, Tokens, Tok
         balance: tokensAddressBalance.balance,
         totalSent: tokensAddressBalance.totalSent,
         totalReceived: tokensAddressBalance.totalReceived,
+        txAppearances: tokensAddressBalance.txAppearances,
       };
     },
     function(e) {
