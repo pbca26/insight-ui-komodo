@@ -1396,6 +1396,55 @@ function($scope, $routeParams, $location, $interval, Global, Tokens, TokensTrade
   });
 });
 
+// Source: public/src/js/controllers/tokens.js
+angular.module('insight.tokens').controller('TokenTransactionDetailsController',
+function($scope, $routeParams, $route, $location, $interval, Global, Tokens, TokensTransactionsSpecific) {
+  var syncInterval;
+  var pageNum = -1;
+  var cctxid = $routeParams.cctxid;
+  var txid = $routeParams.txid;
+
+  $scope.global = Global;
+  $scope.loading = true;
+  $scope.cctxid = cctxid;
+  $scope.txid = txid;
+
+  Tokens.get({},
+    function(tokensData) {
+      var tokenInfoObj = {};
+
+      for (var i = 0; i < tokensData.tokens.length; i++) {
+        if (tokensData.tokens[i].tokenid === $routeParams.cctxid) {
+          console.warn(tokensData.tokens[i]);
+          $scope.tokenInfo = tokensData.tokens[i];
+          break;
+        }
+      }
+    },
+    function(e) {
+      var err = 'Could not get tokens information' + e.toString();
+      $scope.chart = {
+        error: err
+      };
+    });
+
+    TokensTransactionsSpecific.get({
+    txid: txid,
+    cctxid: cctxid
+  },
+    function(tokensTransactionsSpecific) {
+      $scope.loading = false;
+      console.warn('tokensTransactionsSpecific', tokensTransactionsSpecific);
+      $scope.tx = tokensTransactionsSpecific.txs;
+    },
+    function(e) {
+      var err = 'Could not get token transaction details' + e.toString();
+      $scope.chart = {
+        error: err
+      };
+    });
+});
+
 // Source: public/src/js/controllers/transactions.js
 angular.module('insight.transactions').controller('transactionsController',
 function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress) {
@@ -1886,6 +1935,13 @@ angular.module('insight.tokens')
         address: '@address'
       });
     })
+    .factory('TokensTransactionsSpecific',
+    function($resource) {
+      return $resource(window.apiPrefix + '/tokens/transactions/all', {
+        cctxid: '@cctxid',
+        txid: '@txid',
+      });
+    })
 
 // Source: public/src/js/directives.js
 var ZeroClipboard = window.ZeroClipboard;
@@ -2187,6 +2243,10 @@ angular.module('insight').config(function($routeProvider) {
     when('/tokens/address/:addrStr/:coin?', {
       templateUrl: 'views/tokens/token_address_overview.html',
       title: 'Token Address Overview',
+    }).
+    when('/tokens/:cctxid/transactions/:txid', {
+      templateUrl: 'views/tokens/token_transaction_single.html',
+      title: 'Token Transaction',
     }).
     otherwise({
       templateUrl: 'views/404.html',
