@@ -1422,10 +1422,7 @@ function($scope, $routeParams, $route, $location, $interval, Global, Tokens, Tok
       }
     },
     function(e) {
-      var err = 'Could not get tokens information' + e.toString();
-      $scope.chart = {
-        error: err
-      };
+      $scope.error = 'Could not get tokens information' + e.toString();
     });
 
     TokensTransactionsSpecific.get({
@@ -1435,13 +1432,14 @@ function($scope, $routeParams, $route, $location, $interval, Global, Tokens, Tok
     function(tokensTransactionsSpecific) {
       $scope.loading = false;
       console.warn('tokensTransactionsSpecific', tokensTransactionsSpecific);
-      $scope.tx = tokensTransactionsSpecific.txs;
+      if (typeof tokensTransactionsSpecific.txs && tokensTransactionsSpecific.txs === 'No such transaction exists') {
+        $scope.error = 'Could not get token transaction details, non existing transaction';
+      } else {
+        $scope.tx = tokensTransactionsSpecific.txs;
+      }
     },
     function(e) {
-      var err = 'Could not get token transaction details' + e.toString();
-      $scope.chart = {
-        error: err
-      };
+      $scope.error = 'Could not get token transaction details' + e.toString();
     });
 });
 
@@ -2244,7 +2242,7 @@ angular.module('insight').config(function($routeProvider) {
       templateUrl: 'views/tokens/token_address_overview.html',
       title: 'Token Address Overview',
     }).
-    when('/tokens/:cctxid/transactions/:txid', {
+    when('/tokens/:cctxid/transactions/:txid/:coin?', {
       templateUrl: 'views/tokens/token_transaction_single.html',
       title: 'Token Transaction',
     }).

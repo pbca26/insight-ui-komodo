@@ -85,6 +85,9 @@ app.get('/tokens/*/richlist/:coin?', (req, res) => {
 app.get('/tokens/*/transactions/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
+app.get('/tokens/*/transactions/:txid?/:coin?', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 app.get('/tokens/*/address/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
@@ -116,4 +119,4 @@ if (config.https) {
             .listen(config.port, config.isDev ? 'localhost' : config.ip);
 }
 
-console.log(`Insight Common UI server is running`);
+console.log('Insight Common UI server is running');
