@@ -112,18 +112,34 @@
       <div class="col-md-12">
         <table class="table" style="table-layout: fixed">
           <tbody>
-          <tr>
-            <td><strong translate>Image URL</strong></td>
-            <td class="text-right text-muted">{{tokenInfo.data.decoded.image}}</td>
-          </tr>
-          <tr>
-            <td><strong translate>Is physical copy included</strong></td>
-            <td class="text-right text-muted">{{tokenInfo.data.decoded.physical}}</td>
-          </tr>
-          <tr ng-if="tokenInfo.data.decoded.info">
-            <td><strong translate>Additional info</strong></td>
-            <td class="text-right text-muted">{{tokenInfo.data.decoded.info}}</td>
-          </tr>
+            <tr ng-if="tokenInfo.data.decoded.image">
+              <td><strong translate>Image URL</strong></td>
+              <td class="text-right text-muted">{{tokenInfo.data.decoded.image}}</td>
+            </tr>
+            <tr ng-if="tokenInfo.data.decoded.physical">
+              <td><strong translate>Is physical copy included</strong></td>
+              <td class="text-right text-muted">{{tokenInfo.data.decoded.physical}}</td>
+            </tr>
+            <tr ng-if="tokenInfo.data.decoded.info">
+              <td><strong translate>Additional info</strong></td>
+              <td class="text-right text-muted">{{tokenInfo.data.decoded.info}}</td>
+            </tr>
+            <tr ng-if="tokenInfo.data.decoded.id">
+              <td><strong translate>ID</strong></td>
+              <td class="text-right text-muted">{{tokenInfo.data.decoded.id}}</td>
+            </tr>
+            <tr ng-if="tokenInfo.data.decoded.url">
+              <td><strong translate>URL</strong></td>
+              <td class="text-right text-muted">{{tokenInfo.data.decoded.url}}</td>
+            </tr>
+            <tr ng-if="tokenInfo.data.decoded.royalty">
+              <td><strong translate>Royalty</strong></td>
+              <td class="text-right text-muted">{{tokenInfo.data.decoded.royalty}}</td>
+            </tr>
+            <tr ng-if="tokenInfo.data.decoded.arbitrary">
+              <td><strong translate>Arbitrary data</strong></td>
+              <td class="text-right text-muted">{{tokenInfo.data.decoded.arbitrary}}</td>
+            </tr>
           </tbody>
         </table>
       </div>
