@@ -130,11 +130,11 @@
             </tr>
             <tr ng-if="tokenInfo.data.decoded.url">
               <td><strong translate>URL</strong></td>
-              <td class="text-right text-muted">{{tokenInfo.data.decoded.url}}</td>
+              <td class="text-right text-muted"><a href="{{tokenInfo.data.decoded.url}}">{{tokenInfo.data.decoded.url}}</a></td>
             </tr>
             <tr ng-if="tokenInfo.data.decoded.royalty">
               <td><strong translate>Royalty</strong></td>
-              <td class="text-right text-muted">{{tokenInfo.data.decoded.royalty}}</td>
+              <td class="text-right text-muted">{{tokenInfo.data.decoded.royalty * 100 / 1000}}%</td>
             </tr>
             <tr ng-if="tokenInfo.data.decoded.arbitrary">
               <td><strong translate>Arbitrary data</strong></td>
