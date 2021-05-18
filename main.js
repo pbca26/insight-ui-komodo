@@ -50,7 +50,7 @@ app.get('/block-index/*/:coin?', (req, res) => {
 app.get('/blocks-date/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.get('/tx/:coin?', (req, res) => {
+app.get('/tx/:txid/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 app.get('/address/*/:coin?', (req, res) => {

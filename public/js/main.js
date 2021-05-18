@@ -2158,7 +2158,7 @@ angular.module('insight').config(function($routeProvider) {
       controller: 'BlocksController',
       templateUrl: 'views/redirect.html'
     }).
-    when('/tx/send/coin/:coin', {
+    when('/tx/send/:coin?', {
       templateUrl: 'views/transaction_sendraw.html',
       title: 'Broadcast Raw Transaction'
     }).
