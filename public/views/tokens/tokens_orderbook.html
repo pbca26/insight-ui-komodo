@@ -21,7 +21,7 @@
         </tr>
         <tr class="fader" data-ng-repeat='o in orderbook'>
           <td>{{o.funcid === 's' ? 'Sell' : 'Buy'}}</td>
-          <td>{{o.amount}}</td>
+          <td>{{o.totalrequired}}</td>
           <td>{{o.price}} {{mainChainTicker}}</td>
         </tr>
         </tbody>
