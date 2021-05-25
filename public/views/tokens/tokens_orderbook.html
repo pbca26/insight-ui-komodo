@@ -16,14 +16,14 @@
           </tr>
         </thead>
         <tbody>
-        <tr data-ng-show="loading">
-          <td colspan="5"><span translate>Waiting for token orders data...</span> <span class="loader-gif"></span></td>
-        </tr>
-        <tr class="fader" data-ng-repeat='o in orderbook'>
-          <td>{{o.funcid === 's' ? 'Sell' : 'Buy'}}</td>
-          <td>{{o.totalrequired}}</td>
-          <td>{{o.price}} {{mainChainTicker}}</td>
-        </tr>
+          <tr data-ng-show="loading">
+            <td colspan="5"><span translate>Waiting for token orders data...</span> <span class="loader-gif"></span></td>
+          </tr>
+          <tr class="fader" data-ng-repeat='o in orderbook'>
+            <td>{{o.funcid === 's' ? 'Sell' : 'Buy'}}</td>
+            <td>{{o.totalrequired}}</td>
+            <td>{{o.price}} {{mainChainTicker}}</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -16,17 +16,17 @@
           </tr>
         </thead>
         <tbody>
-        <tr data-ng-show="loading">
-          <td colspan="5"><span translate>Waiting for tokens data...</span> <span class="loader-gif"></span></td>
-        </tr>
-        <tr class="fader" data-ng-repeat='t in tokens'>
-          <td>
-            <a href="{{$root.formatUrl('tokens/' + t.tokenid + '/transactions')}}">{{t.name}}</a><br/>
-            <small>{{t.description}}</small>
-          </td>
-          <td>{{t.supply}}</td>
-          <td class="text-right">{{t.ownerAddress}}</td>
-        </tr>
+          <tr data-ng-show="loading">
+            <td colspan="5"><span translate>Waiting for tokens data...</span> <span class="loader-gif"></span></td>
+          </tr>
+          <tr class="fader" data-ng-repeat='t in tokens'>
+            <td>
+              <a href="{{$root.formatUrl('tokens/' + t.tokenid + '/transactions')}}">{{t.name}}</a><br/>
+              <small>{{t.description}}</small>
+            </td>
+            <td>{{t.supply}}</td>
+            <td class="text-right">{{t.ownerAddress}}</td>
+          </tr>
         </tbody>
       </table>
     </div>

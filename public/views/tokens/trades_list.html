@@ -4,7 +4,7 @@
   <h4>Total trades: {{stats.count}}</h4>
 </div>
 <div class="block-tx" data-ng-show="txs && txs[0].txid" data-ng-repeat="tx in txs">
-<div data-ng-include src="'views/tokens/trade.html'"></div>
+  <div data-ng-include src="'views/tokens/trade.html'"></div>
 </div>
 <div class="progress progress-striped active" data-ng-show="loading">
   <div class="progress-bar progress-bar-info" style="width: 100%">

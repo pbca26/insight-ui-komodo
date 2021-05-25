@@ -20,16 +20,16 @@
           </tr>
         </thead>
         <tbody>
-        <tr data-ng-show="loading">
-          <td colspan="5"><span translate>Waiting for token address data...</span> <span class="loader-gif"></span></td>
-        </tr>
-        <tr class="fader" data-ng-repeat='t in holdings'>
-          <td>
-            <a href="{{$root.formatUrl('tokens/' + t.tokenId + '/address/' + address)}}">{{tokenInfo[t.tokenId].name}}</a>
-            <img ng-if="tokenInfo[t.tokenId].data && tokenInfo[t.tokenId].data.decoded && tokenInfo[t.tokenId].data.decoded.image" ng-src="{{tokenInfo[t.tokenId].data.decoded.image}}" width="50" height="50" style="margin-left: 10px" />
-          </td>
-          <td>{{t.balance}}</td>
-        </tr>
+          <tr data-ng-show="loading">
+            <td colspan="5"><span translate>Waiting for token address data...</span> <span class="loader-gif"></span></td>
+          </tr>
+          <tr class="fader" data-ng-repeat='t in holdings'>
+            <td>
+              <a href="{{$root.formatUrl('tokens/' + t.tokenId + '/address/' + address)}}">{{tokenInfo[t.tokenId].name}}</a>
+              <img ng-if="tokenInfo[t.tokenId].data && tokenInfo[t.tokenId].data.decoded && tokenInfo[t.tokenId].data.decoded.image" ng-src="{{tokenInfo[t.tokenId].data.decoded.image}}" width="50" height="50" style="margin-left: 10px" />
+            </td>
+            <td>{{t.balance}}</td>
+          </tr>
         </tbody>
       </table>
     </div>

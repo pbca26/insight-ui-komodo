@@ -3,8 +3,8 @@
   <div class="secondary_navbar hidden-xs hidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-show="address.addrStr" data-ng-init="hideSNavbar=0">
     <div class="container" data-ng-if="!hideSNavbar">
       <div class="col-md-8 text-left">
-          <h3 translate>Address</h3> {{address.addrStr}}
-          <span class="btn-copy" clip-copy="address.addrStr"></span>
+        <h3 translate>Address</h3> {{address.addrStr}}
+        <span class="btn-copy" clip-copy="address.addrStr"></span>
       </div>
       <div class="col-md-4">
         <span class="txvalues txvalues-primary"><strong translate>Final Balance</strong> {{address.balance}} {{tokenInfo.name}}</span>
@@ -32,22 +32,22 @@
       <div class="col-md-10">
         <table class="table">
           <tbody>
-          <tr>
-            <td><strong translate>Total Received</strong></td>
-            <td class="ellipsis text-right">{{address.totalReceived}} {{tokenInfo.name}}</td>
-          </tr>
-          <tr>
-            <td><strong translate>Total Sent</strong></td>
-            <td class="ellipsis text-right">{{address.totalSent}} {{tokenInfo.name}}</td>
-          </tr>
-          <tr>
-            <td><strong translate>Final Balance</strong></td>
-            <td class="ellipsis text-right">{{address.balance}} {{tokenInfo.name}}</td>
-          </tr>
-          <tr>
-            <td><strong translate>No. Transactions</strong></td>
-            <td class="ellipsis text-right">{{address.txAppearances}}</td>
-          </tr>
+            <tr>
+              <td><strong translate>Total Received</strong></td>
+              <td class="ellipsis text-right">{{address.totalReceived}} {{tokenInfo.name}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>Total Sent</strong></td>
+              <td class="ellipsis text-right">{{address.totalSent}} {{tokenInfo.name}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>Final Balance</strong></td>
+              <td class="ellipsis text-right">{{address.balance}} {{tokenInfo.name}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>No. Transactions</strong></td>
+              <td class="ellipsis text-right">{{address.txAppearances}}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -59,14 +59,14 @@
       <h3 translate>Unconfirmed</h3>
       <table class="table">
         <tbody>
-        <tr>
-          <td class="small" translate>Unconfirmed Txs Balance</td>
-          <td class="address ellipsis text-right">{{$root.currency.getConvertion(address.unconfirmedBalance)}}</td>
-        </tr>
-        <tr>
-          <td class="small" translate>No. Transactions</td>
-          <td class="address ellipsis text-right">{{address.unconfirmedTxApperances}}</td>
-        </tr>
+          <tr>
+            <td class="small" translate>Unconfirmed Txs Balance</td>
+            <td class="address ellipsis text-right">{{$root.currency.getConvertion(address.unconfirmedBalance)}}</td>
+          </tr>
+          <tr>
+            <td class="small" translate>No. Transactions</td>
+            <td class="address ellipsis text-right">{{address.unconfirmedTxApperances}}</td>
+          </tr>
         </tbody>
       </table>
     </div>
