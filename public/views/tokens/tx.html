@@ -28,17 +28,19 @@
     <div class="row">
       <!-- <<< Simple view -->
       <div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-if="tx.type !=='coinbase'">
           <div class="panel-body transaction-vin-vout">
-            <div class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == tx.from}">
+            <div data-ng-show="tx.type !== 'coinbase'" class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == tx.from}">
               {{tx.value}} {{tokenInfo.name}}
             </div>
             <div class="ellipsis">
-              <a ng-if="address !== tx.from" href="{{$root.formatUrl('/tokens/' + cctxid + '/address/' + tx.from)}}">{{tx.from}}</a>
+              <a ng-if="address !== tx.from" href="/tokens/{{cctxid}}/address/{{tx.from}}">{{tx.from}}</a>
+              </tr>
               <span ng-if="address === tx.from" class="text-muted" title="Current Token Address">{{address}}</span>
             </div>
           </div>
         </div>
+        <div style="padding: 10px 20px;text-align: center;" data-ng-show="tx.type === 'coinbase'">Coinbase</div>
       </div>
     </div>
   </div>
