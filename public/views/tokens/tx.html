@@ -72,7 +72,49 @@
     </div>
   </div>
 </div>
-
+<div class="row line-mid" ng-if="tx.royalty">
+  <div class="col-md-5">
+    <div class="row">
+      <!-- <<< Simple view -->
+      <div>
+        <div class="panel panel-default">
+          <div class="panel-body transaction-vin-vout">
+            <div class="ellipsis">
+              <span title="Current Token Address">{{tx.royalty.royaltyPercentage}}% royalty</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <div class="hidden-xs hidden-sm text-center">
+      <span class="lead glyphicon glyphicon-chevron-right text-muted"></span>
+    </div>
+    <div class="hidden-md hidden-lg text-center">
+      <span class="lead glyphicon glyphicon-chevron-down text-muted"></span>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <!-- Simple view >>> -->
+      <div>
+        <div>
+          <div class="transaction-vin-vout panel panel-default">
+            <div class="panel-body">
+              <div class="pull-right btc-value" data-ng-class="{'text-danger': $root.currentAddr == tx.to}">
+                {{tx.royalty.value}} {{tokenInfo.name}}
+              </div>
+              <div class="ellipsis">
+                <a href="/address/{{tx.royalty.receiver.address}}">{{tx.royalty.receiver.address}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!--div class="well well-sm bgwhite ellipsis" data-ng-if="itemsExpanded && !block.hash && tx.blockhash">
   <strong translate>Included in Block</strong> <a class="text-muted" href="block/{{tx.blockhash}}">{{tx.blockhash}}</a>
   <span class="btn-copy" clip-copy="tx.blockhash"></span>
