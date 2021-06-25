@@ -34,6 +34,7 @@ InsightUI.prototype.getRoutePrefix = function() {
 InsightUI.prototype.setupRoutes = function(app, express) {
   var self = this;
 
+  app.use('/public', express.static(__dirname + '/../public'));
   app.use('/', function(req, res, next){
     if (req.headers.accept && req.headers.accept.indexOf('text/html') !== -1 &&
       req.headers["X-Requested-With"] !== 'XMLHttpRequest'
