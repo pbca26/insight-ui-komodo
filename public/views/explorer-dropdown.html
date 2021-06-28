@@ -1,8 +1,8 @@
 <span class="explorers--dropdown{{isOpened ? ' open' : ''}}">
-  <a class="dropdown-toggle-trigger explorers-selector" ng-click="toggleSelect()">
-    <img ng-src="public/img/coins/{{coin.toLowerCase()}}.png" alt="Logo"> <span class="symbol">{{coin.toUpperCase()}}</span> <span class="caret"></span>
+  <a class="dropdown-toggle-trigger explorers-selector" ng-click="explorers.length ? toggleSelect() : null" ng-class="{'coin-dropdown-nohover': explorers.length < 2}">
+    <img ng-src="public/img/coins/{{coin.toLowerCase()}}.png" alt="Logo"> <span class="symbol">{{coin.toUpperCase()}}</span> <span class="caret" ng-if="explorers.length > 1"></span>
   </a>
-  <ul class="dropdown-menu-block">
+  <ul class="dropdown-menu-block" ng-if="explorers.length">
     <input type="text" ng-keyup="keyup()" class="form-control quick-search" data-ng-model="explorerQuickFilter" placeholder="Quick search" data-ng-submit="search()" focus="true">       
     <div class="no-match" ng-show="!explorers.length">No match</div>
     <li data-ng-repeat="item in explorers" ng-show="explorers.length">

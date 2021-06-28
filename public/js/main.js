@@ -2269,6 +2269,7 @@ angular.module('insight')
     amMoment.changeLocale(defaultLanguage);
     $rootScope.coin = window.netSymbol;
     $rootScope.enableAdRotator = window.enableAdRotator;
+    $rootScope.multicoin = Object.keys(_explorers).length > 1;
 
     $rootScope.$on('$routeChangeStart', function() {
       ngProgress.start();

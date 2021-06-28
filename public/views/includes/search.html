@@ -1,7 +1,7 @@
 <form id="search-form" data-ng-controller="SearchController" role="search" data-ng-submit="search()">
   <div class="form-group" data-ng-class="{'has-error': badQuery}">
     <input id="search" type="text" class="form-control" data-ng-model="q" data-ng-class="{'loading': loading}" placeholder="{{$root.searchAssets ? 'Search address' : 'Search for block, transaction or address'|translate}}" data-ng-submit="search()" focus="true">
-    <search-selector></search-selector>
+    <search-selector ng-if="$root.multicoin"></search-selector>
   </div>
   <div class="no_matching text-danger" data-ng-show="badQuery" translate>No matching records found!</div>
 </form>

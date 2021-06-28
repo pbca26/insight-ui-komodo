@@ -15,6 +15,10 @@
   vertical-align: middle !important;
 }
 
+.coin-dropdown-nohover {
+  pointer-events: none;
+}
+
 @media (max-width: 1250px) {
   .status {
     display: none !important;
