@@ -553,7 +553,7 @@ angular.module('insight.system').controller('FooterController',
 // Source: public/src/js/controllers/header.js
 angular.module('insight.system').controller('HeaderController',
   function($scope, $rootScope, $modal, getSocket, Global, Block, $location, $route) {
-    var isTokensEnabledChain = _explorers[$rootScope.coin] && _explorers[$rootScope.coin].isTokens;
+    var isTokensEnabledChain = _explorers[$rootScope.coin] && _explorers[$rootScope.coin].tokens;
     $scope.global = Global;
     $scope.location = $location;
 
