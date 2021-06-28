@@ -2152,7 +2152,7 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/block/:blockHash/:coin?', {
       templateUrl: 'views/block.html',
-      title: 'Komodo Block '
+      title: (window.netSymbol === 'KMD' ? 'Komodo ' : window.netSymbol) + ' Block '
     }).
     when('/block-index/:blockHeight/:coin?', {
       controller: 'BlocksController',
@@ -2164,19 +2164,19 @@ angular.module('insight').config(function($routeProvider) {
     }).
     when('/tx/:txId/:v_type?/:v_index?/:coin?', {
       templateUrl: 'views/transaction.html',
-      title: 'Komodo Transaction '
+      title: (window.netSymbol === 'KMD' ? 'Komodo ' : window.netSymbol) + ' Transaction '
     }).
     when('/blocks/:coin?', {
       templateUrl: 'views/block_list.html',
-      title: 'Komodo Blocks solved Today'
+      title: (window.netSymbol === 'KMD' ? 'Komodo ' : window.netSymbol) + ' Blocks solved Today'
     }).
     when('/blocks-date/:blockDate/:startTimestamp?/:coin?', {
       templateUrl: 'views/block_list.html',
-      title: 'Komodo Blocks solved '
+      title: (window.netSymbol === 'KMD' ? 'Komodo ' : window.netSymbol) + ' Blocks solved '
     }).
     when('/address/:addrStr/:coin?', {
       templateUrl: 'views/address.html',
-      title: 'Komodo Address '
+      title: (window.netSymbol === 'KMD' ? 'Komodo ' : window.netSymbol) + ' Address '
     }).
     when('/charts/:coin?', {
       templateUrl: 'views/charts.html',
