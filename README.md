@@ -11,3 +11,7 @@ NodeJS >= 8
 - (optional) copy priv.pem (privkey) and cert.pem to certs folder
 - (optional) set https to true https://github.com/pbca26/insight-ui-komodo/blob/master/main.js#L66
 - npm start
+
+# Single chain Insight Explorer UI
+- replace public/js/explorers.js with contents from public/js/explorers.singlechain.js
+- toggle required flags, change ports/urls
