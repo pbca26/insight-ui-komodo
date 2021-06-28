@@ -76,7 +76,9 @@
       </div>
     </div>
     <script language="javascript">
-      const coin = getCoinUrlParam(window.location.href);
+      window.enableAdRotator = false;
+      
+      var coin = getCoinUrlParam(window.location.href);
 
       if (coin &&
           _explorers[coin.toUpperCase()] &&
@@ -85,9 +87,23 @@
         window.urlPrefix = typeof _explorers[coin.toUpperCase()] === 'object' ? _explorers[coin.toUpperCase()].url : _explorers[coin.toUpperCase()];
         window.netSymbol = coin.toUpperCase();
       } else {
-        window.apiPrefix = _explorers.KMD + '/insight-api-komodo';
-        window.urlPrefix = _explorers.KMD;
-        window.netSymbol = 'KMD';
+        if (explorers.length === 1) {
+          var coin = explorers[0];
+
+          window.netSymbol = coin;
+          window.apiPrefix = _explorers[coin].url + _explorers[coin].apiPrefix;
+          window.urlPrefix = _explorers[coin].url;
+        } else {
+          var coin;
+
+          for (var key in _explorers) {
+            if (_explorers[key].default) coin = key; 
+          }
+
+          window.apiPrefix = _explorers[coin].url + _explorers[coin].apiPrefix;
+          window.urlPrefix = _explorers[coin].url;
+          window.netSymbol = _explorers[coin].symbol;
+        }
       }
     </script>
     <script src="public/js/socket.io.js"></script>
