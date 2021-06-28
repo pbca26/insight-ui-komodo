@@ -622,14 +622,16 @@ angular.module('insight.system').controller('IndexController',
     $scope.global = Global;
 
     var _getNota = function() {
-      $http.get('https://' + $rootScope.coin + '.explorer.dexstats.info/insight-api-komodo/status?q=getInfo').then(function(response) {
-        if (response &&
-            response.data &&
-            response.data.info &&
-            response.data.info.notarized) {
-          $rootScope.notarized = response.data.info.notarized;
-        }
-      });
+      if (_explorers[$rootScope.coin].notarized) {
+        $http.get('https://' + $rootScope.coin + '.explorer.dexstats.info/insight-api-komodo/status?q=getInfo').then(function(response) {
+          if (response &&
+              response.data &&
+              response.data.info &&
+              response.data.info.notarized) {
+            $rootScope.notarized = response.data.info.notarized;
+          }
+        });
+      }
     };
 
     var _getBlocks = function() {
@@ -970,14 +972,16 @@ angular.module('insight.status').controller('StatusController',
     $scope.global = Global;
 
     var _getNota = function() {
-      $http.get('https://' + $rootScope.coin + '.explorer.dexstats.info/insight-api-komodo/status?q=getInfo').then(function(response) {
-        if (response &&
-            response.data &&
-            response.data.info &&
-            response.data.info.notarized) {
-          $rootScope.notarized = response.data.info.notarized;
-        }
-      });
+      if (_explorers[$rootScope.coin].notarized) {
+        $http.get('https://' + $rootScope.coin + '.explorer.dexstats.info/insight-api-komodo/status?q=getInfo').then(function(response) {
+          if (response &&
+              response.data &&
+              response.data.info &&
+              response.data.info.notarized) {
+            $rootScope.notarized = response.data.info.notarized;
+          }
+        });
+      }
     };
 
     $scope.getStatus = function(q) {
