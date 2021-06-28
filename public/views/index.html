@@ -7,7 +7,7 @@
     <div id="home" class="row">
       <div class="col-xs-12 col-md-8">
         <div id="search-form-mobile" class="visible-xs" data-ng-include src="'views/includes/search.html'"></div>
-        <div data-ng-controller="AdRotatorController">
+        <div data-ng-controller="AdRotatorController" ng-if="$root.enableAdRotator">
           <div class="adrotator-container">
             <strong>{{ads[adIndex].title}}</strong>
             <div class="text">
