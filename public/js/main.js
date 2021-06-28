@@ -2166,14 +2166,6 @@ angular.module('insight').config(function($routeProvider) {
       templateUrl: 'views/transaction.html',
       title: 'Komodo Transaction '
     }).
-    when('/', {
-      templateUrl: 'views/index.html',
-      title: 'Home'
-    }).
-    when('/:coin?', {
-      templateUrl: 'views/index.html',
-      title: 'Home'
-    }).
     when('/blocks/:coin?', {
       templateUrl: 'views/block_list.html',
       title: 'Komodo Blocks solved Today'
@@ -2245,6 +2237,14 @@ angular.module('insight').config(function($routeProvider) {
     when('/tokens/:cctxid/transactions/:txid/:coin?', {
       templateUrl: 'views/tokens/token_transaction_single.html',
       title: 'Token Transaction',
+    }).
+    when('/', {
+      templateUrl: 'views/index.html',
+      title: 'Home'
+    }).
+    when('/:coin?', {
+      templateUrl: 'views/index.html',
+      title: 'Home'
     }).
     otherwise({
       templateUrl: 'views/404.html',
