@@ -1449,6 +1449,49 @@ function($scope, $routeParams, $route, $location, $interval, Global, Tokens, Tok
     });
 });
 
+angular.module('insight.tokens').controller('DecodeRawTokenTransactionController',
+function($scope, $http) {
+  $scope.transaction = '';
+  $scope.status = 'ready';  // ready|loading|decoded|error
+  $scope.decodedData = '';
+  $scope.error = null;
+
+  $scope.formValid = function() {
+    return !!$scope.transaction;
+  };
+  $scope.decode = function() {
+    var postData = {
+      rawtx: $scope.transaction
+    };
+    $scope.status = 'loading';
+    $http.post(window.apiPrefix + '/tokens/decode', postData)
+      .success(function(data, status, headers, config) {
+        if(typeof(data) != 'object') {
+          // API returned 200 but the format is not known
+          $scope.status = 'error';
+          $scope.error = 'No decoded data got back';
+          return;
+        }
+
+        if (data.msg === 'error') {
+          $scope.status = 'error';
+          $scope.error = data.result;
+        } else {
+          $scope.status = 'decoded';
+          $scope.decodedData = JSON.stringify(data.decoded, null, 2);
+        }
+      })
+      .error(function(data, status, headers, config) {
+        $scope.status = 'error';
+        if(data) {
+          $scope.error = data;
+        } else {
+          $scope.error = "No error message given (connection error?)"
+        }
+      });
+  };
+});
+
 // Source: public/src/js/controllers/transactions.js
 angular.module('insight.transactions').controller('transactionsController',
 function($scope, $rootScope, $routeParams, $location, Global, Transaction, TransactionsByBlock, TransactionsByAddress) {
@@ -2243,6 +2286,10 @@ angular.module('insight').config(function($routeProvider) {
     when('/tokens/:cctxid/transactions/:txid/:coin?', {
       templateUrl: 'views/tokens/token_transaction_single.html',
       title: 'Token Transaction',
+    }).
+    when('/tokens/decode/:coin?', {
+      templateUrl: 'views/tokens/token_decode.html',
+      title: 'Decode Raw Token Transaction'
     }).
     when('/', {
       templateUrl: 'views/index.html',
