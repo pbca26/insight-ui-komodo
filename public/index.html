@@ -71,7 +71,7 @@
           <span> &middot; </span>
           <a href="{{$root.formatUrl('tx/send')}}" translate>broadcast transaction</a>
           <span ng-if="$root.tokens"> &middot; </span>
-          <a href="tokens/decode" ng-if="$root.tokens" translate>decode token transaction</a>
+          <a href="{{$root.formatUrl('tokens/decode')}}" ng-if="$root.tokens" translate>decode token transaction</a>
           ]
         </div>
         <a class="insight m10v pull-right" target="_blank" href="http://insight.is">insight <small>API v{{version}}</small></a>
