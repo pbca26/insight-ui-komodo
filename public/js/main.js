@@ -2317,6 +2317,7 @@ angular.module('insight')
     $rootScope.coin = window.netSymbol;
     $rootScope.enableAdRotator = window.enableAdRotator;
     $rootScope.multicoin = Object.keys(_explorers).length > 1;
+    $rootScope.tokens = _explorers[$rootScope.coin] && _explorers[$rootScope.coin].tokens;
 
     $rootScope.$on('$routeChangeStart', function() {
       ngProgress.start();
