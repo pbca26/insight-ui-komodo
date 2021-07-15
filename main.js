@@ -94,7 +94,9 @@ app.get('/tokens/*/address/*/:coin?', (req, res) => {
 app.get('/tokens/address/*/:coin?', (req, res) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-
+app.get('/tokens/decode/:coin?', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/views', express.static(path.join(__dirname, 'public/views')));
 
